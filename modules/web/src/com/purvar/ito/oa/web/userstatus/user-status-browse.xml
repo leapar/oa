@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.purvar.ito.oa.web.userstatus.UserStatusBrowse"
+        focusComponent="userStatusesTable"
+        lookupComponent="userStatusesTable"
+        messagesPack="com.purvar.ito.oa.web.userstatus">
+    <dsContext>
+        <groupDatasource id="userStatusesDs"
+                         class="com.purvar.ito.oa.entity.UserStatus"
+                         view="_local">
+            <query>
+                <![CDATA[select e from oa$UserStatus e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="userStatusesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="userStatusesTable"
+                datasource="userStatusesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="userStatusesTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rows datasource="userStatusesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="userStatusesTable.create"/>
+                <button id="editBtn"
+                        action="userStatusesTable.edit"/>
+                <button id="removeBtn"
+                        action="userStatusesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

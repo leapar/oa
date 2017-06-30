@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.purvar.ito.oa.web.record.RecordEdit"
+        datasource="recordDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.purvar.ito.oa.web.record">
+    <dsContext>
+        <datasource id="recordDs"
+                    class="com.purvar.ito.oa.entity.Record"
+                    view="record-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <vbox spacing="true">
+            <hbox height="320px"
+                  spacing="true">
+                <fieldGroup id="fieldGroup"
+                            datasource="recordDs"
+                            editable="false"
+                            height="231px">
+                    <column width="250px">
+                        <field editable="false"
+                               property="user"/>
+                        <field editable="false"
+                               property="province"/>
+                        <field editable="false"
+                               property="district"/>
+                        <field editable="false"
+                               property="address"/>
+                        <field editable="false"
+                               property="createTs"/>
+                        <field editable="false"
+                               property="ip"/>
+                        <field editable="false"
+                               property="lat"/>
+                        <field editable="false"
+                               property="lng"/>
+                    </column>
+                </fieldGroup>
+                <upload id="upload"
+                        accept="*.jpg,*.png"
+                        permittedExtensions=".jpg,.jpeg,.png,.gif"
+                        visible="false"/>
+                <button id="button"
+                        caption="Close"
+                        invoke="onButtonClick"
+                        width="100px"/>
+            </hbox>
+            <split height="320px"
+                   orientation="horizontal"
+                   pos="50%"
+                   width="100%">
+                <scrollBox>
+                    <embedded id="embedded"
+                              width="100%"/>
+                </scrollBox>
+                <htmlBox id="htmlBox"
+                         height="300px"
+                         template="testHtmlBox"/>
+            </split>
+        </vbox>
+    </layout>
+</window>

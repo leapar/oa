@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="2.0">
+    <persistence-unit name="oa"
+                      transaction-type="RESOURCE_LOCAL">
+        <class>com.purvar.ito.oa.entity.Area</class>
+        <class>com.purvar.ito.oa.entity.Company</class>
+        <class>com.purvar.ito.oa.entity.DeviceLog</class>
+        <class>com.purvar.ito.oa.entity.Record</class>
+        <class>com.purvar.ito.oa.entity.ExtUser</class>
+        <class>com.purvar.ito.oa.entity.UserType</class>
+        <class>com.purvar.ito.oa.entity.UserStatus</class>
+    </persistence-unit>
+</persistence>

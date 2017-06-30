@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.purvar.ito.oa.web.devicelog.DeviceLogBrowse"
+        focusComponent="deviceLogsTable"
+        lookupComponent="deviceLogsTable"
+        messagesPack="com.purvar.ito.oa.web.devicelog">
+    <dsContext>
+        <groupDatasource id="deviceLogsDs"
+                         class="com.purvar.ito.oa.entity.DeviceLog"
+                         view="deviceLog-view">
+            <query>
+                <![CDATA[select e from oa$DeviceLog e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="deviceLogsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="deviceLogsTable"
+                datasource="deviceLogsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="deviceLogsTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        visible="false"/>
+                <action id="edit"
+                        visible="false"/>
+                <action id="remove"
+                        visible="false"/>
+            </actions>
+            <columns>
+                <column id="device_no"/>
+                <column id="user"
+                        generator="generateUserCell"/>
+            </columns>
+            <rows datasource="deviceLogsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="deviceLogsTable.create"/>
+                <button id="editBtn"
+                        action="deviceLogsTable.edit"/>
+                <button id="removeBtn"
+                        action="deviceLogsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

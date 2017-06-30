@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.purvar.ito.oa.web.usertype.UserTypeBrowse"
+        focusComponent="userTypesTable"
+        lookupComponent="userTypesTable"
+        messagesPack="com.purvar.ito.oa.web.usertype">
+    <dsContext>
+        <groupDatasource id="userTypesDs"
+                         class="com.purvar.ito.oa.entity.UserType"
+                         view="_local">
+            <query>
+                <![CDATA[select e from oa$UserType e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="userTypesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="userTypesTable"
+                datasource="userTypesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="userTypesTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rows datasource="userTypesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="userTypesTable.create"/>
+                <button id="editBtn"
+                        action="userTypesTable.edit"/>
+                <button id="removeBtn"
+                        action="userTypesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

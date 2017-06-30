@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.purvar.ito.oa.web.extuser.ExtUserBrowse"
+        extends="/com/haulmont/cuba/gui/app/security/user/browse/user-browse.xml"
+        messagesPack="com.purvar.ito.oa.web.extuser"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd">
+    <layout>
+        <groupTable id="usersTable">
+            <columns>
+                <column id="position"
+                        visible="false"/>
+                <column id="group"
+                        sortable="false"
+                        visible="false"/>
+                <column id="email"
+                        sortable="false"
+                        visible="false"/>
+                <column id="timeZone"
+                        sortable="false"
+                        visible="false"/>
+                <column id="active"
+                        visible="false"/>
+                <column id="changePasswordAtNextLogon"
+                        visible="false"/>
+                <column id="company"/>
+                <column id="status"/>
+                <column id="type"/>
+                <column id="area"/>
+            </columns>
+        </groupTable>
+    </layout>
+</window>

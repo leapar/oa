@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <include file="com/purvar/ito/oa/screens.xml"/>
+    <screen id="oa$UserType.browse"
+            template="com/purvar/ito/oa/web/usertype/user-type-browse.xml"/>
+    <screen id="oa$UserType.edit"
+            template="com/purvar/ito/oa/web/usertype/user-type-edit.xml"/>
+    <screen id="oa$UserStatus.browse"
+            template="com/purvar/ito/oa/web/userstatus/user-status-browse.xml"/>
+    <screen id="oa$UserStatus.edit"
+            template="com/purvar/ito/oa/web/userstatus/user-status-edit.xml"/>
+    <screen id="oa$Area.browse"
+            template="com/purvar/ito/oa/web/area/area-browse.xml"/>
+    <screen id="oa$Area.edit"
+            template="com/purvar/ito/oa/web/area/area-edit.xml"/>
+    <screen id="oa$Company.browse"
+            template="com/purvar/ito/oa/web/company/company-browse.xml"/>
+    <screen id="oa$Company.edit"
+            template="com/purvar/ito/oa/web/company/company-edit.xml"/>
+    <screen id="oa$DeviceLog.browse"
+            template="com/purvar/ito/oa/web/devicelog/device-log-browse.xml"/>
+    <screen id="oa$Record.browse"
+            template="com/purvar/ito/oa/web/record/record-browse.xml"/>
+    <screen id="oa$Record.edit"
+            template="com/purvar/ito/oa/web/record/record-edit.xml"/>
+    <screen id="sec$User.browse"
+            template="com/purvar/ito/oa/web/extuser/ext-user-browse.xml"/>
+    <screen id="sec$User.edit"
+            template="com/purvar/ito/oa/web/extuser/ext-user-edit.xml"/>
+</screen-config>

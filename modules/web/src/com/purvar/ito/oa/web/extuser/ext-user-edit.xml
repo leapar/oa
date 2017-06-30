@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.purvar.ito.oa.web.extuser.ExtUserEdit"
+        extends="/com/haulmont/cuba/gui/app/security/user/edit/user-edit.xml"
+        messagesPack="com.purvar.ito.oa.web.extuser"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd">
+    <layout>
+        <groupBox id="propertiesBox">
+            <grid id="propertiesGrid">
+                <rows>
+                    <row id="propertiesRow">
+                        <fieldGroup id="fieldGroupLeft"
+                                    width="350px">
+                            <column width="200px">
+                                <field id="login"/>
+                                <field id="passw"/>
+                                <field id="confirmPassw"/>
+                                <field id="firstName"
+                                       visible="false"/>
+                                <field id="middleName"
+                                       visible="false"/>
+                                <field id="lastName"
+                                       visible="false"/>
+                                <field id="name"/>
+                                <field ext:index="7"
+                                       property="area"/>
+                                <field id="email"
+                                       visible="false"/>
+                                <field property="company"/>
+                                <field property="status"/>
+                                <field property="type"/>
+                            </column>
+                        </fieldGroup>
+                        <fieldGroup id="fieldGroupRight">
+                            <column width="100px">
+                                <field id="group"
+                                       visible="false"/>
+                                <field id="position"
+                                       visible="false"/>
+                                <field id="language"
+                                       visible="false"/>
+                                <field id="timeZone"
+                                       visible="false"/>
+                                <field id="ipMask"
+                                       visible="false"/>
+                            </column>
+                        </fieldGroup>
+                    </row>
+                </rows>
+            </grid>
+        </groupBox>
+        <split id="split">
+            <vbox id="substPanel"
+                  visible="false"/>
+        </split>
+    </layout>
+</window>

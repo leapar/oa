@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.purvar.ito.oa.web.area.AreaBrowse"
+        focusComponent="areasTable"
+        lookupComponent="areasTable"
+        messagesPack="com.purvar.ito.oa.web.area">
+    <dsContext>
+        <groupDatasource id="areasDs"
+                         class="com.purvar.ito.oa.entity.Area"
+                         view="_local">
+            <query>
+                <![CDATA[select e from oa$Area e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="areasTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="areasTable"
+                datasource="areasDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="areasTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rows datasource="areasDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="areasTable.create"/>
+                <button id="editBtn"
+                        action="areasTable.edit"/>
+                <button id="removeBtn"
+                        action="areasTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

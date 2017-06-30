@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.purvar.ito.oa.entity.ExtUser"
+          extends="user.edit"
+          name="user.edit">
+        <property name="type"
+                  view="_minimal"/>
+        <property name="status"
+                  view="_minimal"/>
+        <property name="company"
+                  view="_minimal"/>
+        <property name="area"
+                  view="_minimal"/>
+        <property name="device_no"/>
+        <property name="api_token"/>
+    </view>
+    <view class="com.purvar.ito.oa.entity.ExtUser"
+          extends="user.browse"
+          name="user.browse">
+        <property name="type"
+                  view="_minimal"/>
+        <property name="status"
+                  view="_minimal"/>
+        <property name="company"
+                  view="_minimal"/>
+        <property name="area"
+                  view="_minimal"/>
+        <property name="device_no"/>
+        <property name="api_token"/>
+    </view>
+    <view class="com.purvar.ito.oa.entity.Record"
+          extends="_local"
+          name="record-view">
+        <property name="file"
+                  view="_minimal"/>
+        <property name="user"
+                  view="_minimal"/>
+        <property name="createTs"/>
+    </view>
+    <view class="com.purvar.ito.oa.entity.DeviceLog"
+          extends="_local"
+          name="deviceLog-view">
+        <property name="user"
+                  view="_minimal"/>
+    </view>
+</views>

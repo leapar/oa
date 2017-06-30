@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.purvar.ito.oa.web.record.RecordBrowse"
+        focusComponent="recordsTable"
+        lookupComponent="recordsTable"
+        messagesPack="com.purvar.ito.oa.web.record">
+    <dsContext>
+        <groupDatasource id="recordsDs"
+                         allowCommit="false"
+                         class="com.purvar.ito.oa.entity.Record"
+                         view="record-view">
+            <query>
+                <![CDATA[select e from oa$Record e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="recordsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="recordsTable"
+                datasource="recordsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="recordsTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        visible="false"/>
+                <action id="excel"/>
+                <action id="edit"
+                        visible="false"/>
+                <action id="remove"
+                        visible="false"/>
+            </actions>
+            <columns>
+                <column id="district"/>
+                <column id="province"/>
+                <column id="address"/>
+                <column id="user"
+                        generator="generateUserCell"/>
+                <column id="file"
+                        generator="generateFileCell"/>
+                <column id="createTs"/>
+                <column id="ip"/>
+                <column id="lng"/>
+                <column id="lat"/>
+            </columns>
+            <rows datasource="recordsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="recordsTable.create"
+                        visible="false"/>
+                <button id="excelButton"
+                        action="recordsTable.excel"
+                        caption="Excel"/>
+                <button id="editBtn"
+                        action="recordsTable.edit"
+                        visible="false"/>
+                <button id="removeBtn"
+                        action="recordsTable.remove"
+                        visible="false"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

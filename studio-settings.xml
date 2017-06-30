@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<studio>
+    <screenDesigner>
+        <screen module="web"
+                presentSize="1680x1050"
+                reference="com/purvar/ito/oa/web/record/record-edit.xml"/>
+    </screenDesigner>
+</studio>
