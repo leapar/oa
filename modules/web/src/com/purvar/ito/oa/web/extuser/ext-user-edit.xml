@@ -29,6 +29,7 @@
                                 <field property="company"/>
                                 <field property="status"/>
                                 <field property="type"/>
+                                <field property="device_no"/>
                             </column>
                         </fieldGroup>
                         <fieldGroup id="fieldGroupRight">

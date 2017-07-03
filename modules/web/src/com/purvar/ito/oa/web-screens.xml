@@ -27,4 +27,6 @@
             template="com/purvar/ito/oa/web/extuser/ext-user-browse.xml"/>
     <screen id="sec$User.edit"
             template="com/purvar/ito/oa/web/extuser/ext-user-edit.xml"/>
+    <screen id="oa$ExtUser.browse2"
+            template="com/purvar/ito/oa/web/extuser/ext-user-browse2.xml"/>
 </screen-config>

@@ -27,13 +27,10 @@
         <groupTable id="recordsTable"
                     width="100%">
             <actions>
-                <action id="create"
-                        visible="false"/>
+                <action id="create"/>
                 <action id="excel"/>
-                <action id="edit"
-                        visible="false"/>
-                <action id="remove"
-                        visible="false"/>
+                <action id="edit"/>
+                <action id="remove"/>
             </actions>
             <columns>
                 <column id="district"/>

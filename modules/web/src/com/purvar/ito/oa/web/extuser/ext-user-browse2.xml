@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.purvar.ito.oa.web.extuser.ExtUserBrowse2"
+        focusComponent="extUsersTable"
+        lookupComponent="extUsersTable"
+        messagesPack="com.purvar.ito.oa.web.extuser">
+    <dsContext>
+        <groupDatasource id="extUsersDs"
+                         class="com.purvar.ito.oa.entity.ExtUser"
+                         view="user.browse">
+            <query>
+                <![CDATA[select e from oa$ExtUser e where e.device_no <> '']]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="extUsersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="extUsersTable"
+                datasource="extUsersDs">
+            <properties exclude=".*"
+                        include="login"/>
+            <property name="login"/>
+            <property name="name"/>
+        </filter>
+        <groupTable id="extUsersTable"
+                    width="100%">
+            <actions>
+                <action id="unlock"
+                        caption="unlock"/>
+            </actions>
+            <columns>
+                <column id="login"/>
+                <column id="name"/>
+                <column id="device_no"/>
+                <column id="action"
+                        generator="generateActionCell"/>
+            </columns>
+            <rows datasource="extUsersDs"/>
+            <rowsCount/>
+        </groupTable>
+    </layout>
+</window>
