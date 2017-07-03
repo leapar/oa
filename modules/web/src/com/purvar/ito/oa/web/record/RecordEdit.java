@@ -77,6 +77,11 @@ public class RecordEdit extends AbstractEditor<Record> {
     public void ready() {
         super.ready();
         // src="url://https://doc.cuba-platform.com/manual-latest/index.html"
+
+        Double lat = getItem().getLat();
+        Double lng = getItem().getLng();
+        String coor = String.format("%f,%f",lng,lat);
+
         String htmlData = "<html>  \n" +
                 "<head>  \n" +
                 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />  \n" +
@@ -99,9 +104,9 @@ public class RecordEdit extends AbstractEditor<Record> {
                 "</html>  \n" +
                 "<script type=\"text/javascript\">  \n" +
                 "    var map = new BMap.Map(\"container\");  \n" +
-                "    map.centerAndZoom(new BMap.Point(116.403884,39.914887), 13);  \n" +
+                "    map.centerAndZoom(new BMap.Point("+coor+"), 13);  \n" +
                 "    map.enableScrollWheelZoom();  \n" +
-                "    var marker=new BMap.Marker(new BMap.Point(116.403884,39.914887));  \n" +
+                "    var marker=new BMap.Marker(new BMap.Point("+coor+"));  \n" +
                 "    map.addOverlay(marker);  </script>";
         String browserCacheVersion = UUID.randomUUID().toString();
 
