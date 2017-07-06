@@ -23,11 +23,19 @@
                                 datasource="recordDs"
                                 editable="false"
                                 height="150px">
-                        <column width="250px">
-                            <field property="user"/>
-                            <field property="province"/>
-                            <field property="district"/>
-                            <field property="address"/>
+                        <column width="400px">
+                            <field caption="姓名"
+                                   editable="false"
+                                   property="user"/>
+                            <field caption="省份"
+                                   editable="false"
+                                   property="province"/>
+                            <field caption="城市"
+                                   editable="false"
+                                   property="district"/>
+                            <field caption="地址"
+                                   editable="false"
+                                   property="address"/>
                         </column>
                     </fieldGroup>
                     <fieldGroup id="fieldgroup_1"
@@ -35,24 +43,33 @@
                                 editable="false"
                                 height="150px">
                         <column width="250px">
-                            <field editable="false"
+                            <field caption="打卡时间"
+                                   dateFormat="msg://dateTimeFormat"
+                                   editable="false"
                                    property="createTs"/>
                             <field editable="false"
-                                   property="ip"/>
-                            <field property="lat"/>
-                            <field property="lng"/>
+                                   property="ip"
+                                   visible="false"/>
+                            <field caption="纬度"
+                                   editable="false"
+                                   property="lat"/>
+                            <field caption="经度"
+                                   editable="false"
+                                   property="lng"/>
                         </column>
                     </fieldGroup>
                 </hbox>
                 <hbox spacing="true">
                     <upload id="upload"
                             accept="*.jpg,*.png"
-                            permittedExtensions=".jpg,.jpeg,.png,.gif"/>
+                            permittedExtensions=".jpg,.jpeg,.png,.gif"
+                            visible="false"/>
                     <button id="button"
                             caption="Close"
                             invoke="onButtonClick"
                             width="100px"/>
-                    <frame screen="editWindowActions"/>
+                    <frame screen="editWindowActions"
+                           visible="false"/>
                 </hbox>
             </vbox>
             <split height="100%"
@@ -65,9 +82,10 @@
                 </scrollBox>
                 <scrollBox>
                     <embedded id="map"
+                              height="600px"
                               src="url://https://doc.cuba-platform.com/manual-latest/index.html"
-                              width="100%"
-                    height="400px"/>
+                              type="BROWSER"
+                              width="100%"/>
                 </scrollBox>
             </split>
         </split>

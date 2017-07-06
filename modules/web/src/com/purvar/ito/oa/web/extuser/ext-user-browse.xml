@@ -7,6 +7,10 @@
     <layout>
         <groupTable id="usersTable">
             <columns>
+                <column id="login"
+                        caption="账号"/>
+                <column id="name"
+                        caption="姓名"/>
                 <column id="position"
                         visible="false"/>
                 <column id="group"
@@ -20,13 +24,25 @@
                         visible="false"/>
                 <column id="active"
                         visible="false"/>
+                <column id="company"
+                        caption="公司"
+                        ext:index="7"/>
+                <column id="status"
+                        caption="状态"
+                        ext:index="8"/>
+                <column id="type"
+                        caption="类型"
+                        ext:index="9"/>
+                <column id="area"
+                        caption="区域"
+                        ext:index="10"/>
                 <column id="changePasswordAtNextLogon"
                         visible="false"/>
-                <column id="company"/>
-                <column id="status"/>
-                <column id="type"/>
-                <column id="area"/>
             </columns>
+            <buttonsPanel>
+                <button id="userTableCopyButton"
+                        caption="复制"/>
+            </buttonsPanel>
         </groupTable>
     </layout>
 </window>

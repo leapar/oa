@@ -10,5 +10,6 @@
         <class>com.purvar.ito.oa.entity.ExtUser</class>
         <class>com.purvar.ito.oa.entity.UserType</class>
         <class>com.purvar.ito.oa.entity.UserStatus</class>
+        <class>com.purvar.ito.oa.entity.AppInfo</class>
     </persistence-unit>
 </persistence>

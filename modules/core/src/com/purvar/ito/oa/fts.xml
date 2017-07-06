@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fts-config xmlns="http://schemas.haulmont.com/cuba/fts.xsd">
+    <entities>
+        <entity class="com.purvar.ito.oa.entity.Area">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.Company">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.DeviceLog">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.Record">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.ExtUser">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.UserType">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.UserStatus">
+            <include re=".*"/>
+        </entity>
+        <entity class="com.purvar.ito.oa.entity.AppInfo">
+            <include re=".*"/>
+        </entity>
+    </entities>
+</fts-config>

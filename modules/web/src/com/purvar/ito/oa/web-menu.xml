@@ -2,12 +2,13 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-oa"
           insertBefore="administration">
-        <item screen="oa$UserType.browse"/>
         <item screen="oa$Record.browse"/>
+        <item screen="oa$ExtUser.browse2"/>
+        <item screen="oa$UserType.browse"/>
         <item screen="oa$UserStatus.browse"/>
         <item screen="oa$Area.browse"/>
         <item screen="oa$Company.browse"/>
         <item screen="oa$DeviceLog.browse"/>
-        <item screen="oa$ExtUser.browse2"/>
+        <item screen="oa$AppInfo.browse"/>
     </menu>
 </menu-config>

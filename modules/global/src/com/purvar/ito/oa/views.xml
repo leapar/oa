@@ -36,6 +36,8 @@
         <property name="user"
                   view="_minimal"/>
         <property name="createTs"/>
+        <property name="thumb"
+                  view="_minimal"/>
     </view>
     <view class="com.purvar.ito.oa.entity.DeviceLog"
           extends="_local"

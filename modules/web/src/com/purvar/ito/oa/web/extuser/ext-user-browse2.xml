@@ -33,10 +33,14 @@
                         caption="unlock"/>
             </actions>
             <columns>
-                <column id="login"/>
-                <column id="name"/>
-                <column id="device_no"/>
+                <column id="login"
+                        caption="账号"/>
+                <column id="name"
+                        caption="姓名"/>
+                <column id="device_no"
+                        caption="设备码"/>
                 <column id="action"
+                        caption="操作"
                         generator="generateActionCell"/>
             </columns>
             <rows datasource="extUsersDs"/>

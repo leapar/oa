@@ -66,6 +66,7 @@ create table OA_RECORD (
     IP varchar(32),
     FILE_ID varchar(32),
     USER_ID varchar(32),
+    THUMB_ID varchar(32),
     --
     primary key (ID)
 )^
@@ -112,3 +113,20 @@ alter table SEC_USER add column API_TOKEN varchar(255) ^
 alter table SEC_USER add column DTYPE varchar(100) ^
 update SEC_USER set DTYPE = 'oa$ExtUser' where DTYPE is null ^
 -- end SEC_USER
+-- begin OA_APP_INFO
+create table OA_APP_INFO (
+    ID varchar(32),
+    VERSION integer not null,
+    CREATE_TS datetime(3),
+    CREATED_BY varchar(50),
+    UPDATE_TS datetime(3),
+    UPDATED_BY varchar(50),
+    DELETE_TS datetime(3),
+    DELETED_BY varchar(50),
+    --
+    ANDROID varchar(512),
+    VER varchar(255),
+    --
+    primary key (ID)
+)^
+-- end OA_APP_INFO

@@ -2,11 +2,18 @@
 buildscript {
     ext.cubaVersion = '6.5.5'
     repositories {
+        mavenLocal()
         maven {
             url 'https://dl.bintray.com/cuba-platform/main'
             
         }
-        
+        maven {
+            url 'https://cuba-platform.bintray.com/premium'
+            credentials {
+                username(rootProject.hasProperty('premiumRepoUser') ? rootProject['premiumRepoUser'] : System.getenv('CUBA_PREMIUM_USER'))
+                password(rootProject.hasProperty('premiumRepoPass') ? rootProject['premiumRepoPass'] : System.getenv('CUBA_PREMIUM_PASSWORD'))
+            }
+        }
         
         mavenCentral()
         jcenter()
@@ -20,10 +27,11 @@ buildscript {
 }
 
 def globalModule = project(':app-global')
-def webThemesModule= project(':app-web-themes')
 def coreModule = project(':app-core')
 def guiModule = project(':app-gui')
 def webModule = project(':app-web')
+def portalModule = project(':app-portal')
+def webThemesModule= project(':app-web-themes')
 
 def servletApi = 'org.apache.tomcat:tomcat-servlet-api:8.0.26'
 
@@ -44,12 +52,16 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    appComponent("com.haulmont.reports:reports-global:$cubaVersion")
+    appComponent("com.haulmont.fts:fts-global:$cubaVersion")
+    appComponent("com.haulmont.charts:charts-global:$cubaVersion")
+    appComponent("com.haulmont.bpm:bpm-global:$cubaVersion")
 
 }
 
 def mysql = 'mysql:mysql-connector-java:5.1.38'
 
-configure([globalModule, coreModule, guiModule, webModule]) {
+configure([globalModule, coreModule, guiModule, webModule, portalModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
     apply(plugin: 'idea')
@@ -74,27 +86,6 @@ configure(globalModule) {
 
     
 }
-configure(webThemesModule) {
-    apply(plugin: 'java')
-    apply(plugin: 'maven')
-    apply(plugin: 'cuba')
-
-    appModuleType = 'web-themes'
-
-    buildDir = file('../build/scss-themes')
-
-    sourceSets {
-        main {
-            java {
-                srcDir '.'
-            }
-            resources {
-                srcDir '.'
-            }
-        }
-    }
-}
-
 
 configure(coreModule) {
 
@@ -128,21 +119,21 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        connectionParams = '?useSSL=false&allowMultiQueries=true&characterEncoding=UTF-8'
         dbms = 'mysql'
-        host = '39.108.125.90'
+        host = 'localhost'
         dbName = 'oa'
         dbUser = 'root'
         dbPassword = ''
+        connectionParams = '?useSSL=false&allowMultiQueries=true'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        connectionParams = '?useSSL=false&allowMultiQueries=true&characterEncoding=UTF-8'
         dbms = 'mysql'
-        host = '39.108.125.90'
+        host = 'localhost'
         dbName = 'oa'
         dbUser = 'root'
         dbPassword = ''
+        connectionParams = '?useSSL=false&allowMultiQueries=true'
     }
 }
 
@@ -213,15 +204,91 @@ configure(webModule) {
 
 
 
+configure(portalModule) {
+    dependencies {
+        provided(servletApi)
+        compile(globalModule)
+        
+    }
+
+    def webappName = 'app-portal'
+    def resourcesDir = "$cuba.tomcat.dir/webapps/$webappName/resources"
+    def ftlDir = "$cuba.tomcat.dir/webapps/$webappName/WEB-INF/templates"
+
+    task deploy(dependsOn: assemble, type: CubaDeployment) {
+        appName = webappName
+        appJars('app-global', 'app-portal')
+    }
+
+    task deployStatic() {
+        doLast {
+            copy {
+                from file('web/resources')
+                include '**/*.css'
+                include '**/*.js'
+                include '**/*.png'
+                include '**/*.gif'
+                include '**/*.jpg'
+                into resourcesDir
+            }
+            copy {
+                from file('web/WEB-INF/templates')
+                include '**/*.ftl'
+                into ftlDir
+            }
+        }
+    }
+
+    task cleanStatic() {
+        doLast {
+            delete resourcesDir
+            delete ftlDir
+        }
+    }
+
+    task webArchive(type: Zip) {
+        from file('web')
+        from file("$buildDir/web")
+        exclude '**/web.xml', '**/app.properties'
+        classifier = 'web'
+    }
+
+    artifacts {
+        archives webArchive
+    }
+}
+
+
+configure(webThemesModule) {
+    apply(plugin: 'java')
+    apply(plugin: 'maven')
+    apply(plugin: 'cuba')
+
+    appModuleType = 'web-themes'
+
+    buildDir = file('../build/scss-themes')
+
+    sourceSets {
+        main {
+            java {
+                srcDir '.'
+            }
+            resources {
+                srcDir '.'
+            }
+        }
+    }
+}
 
 
 task undeploy(type: Delete, dependsOn: ':app-web:cleanConf') {
     delete("$cuba.tomcat.dir/shared")
     delete("$cuba.tomcat.dir/webapps/app-core")
     delete("$cuba.tomcat.dir/webapps/app")
+    delete("$cuba.tomcat.dir/webapps/app-portal")
 }
 
-task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy'], description: 'Redeploys applications and restarts local Tomcat') {
+task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy', ':app-portal:deploy'], description: 'Redeploys applications and restarts local Tomcat') {
     doLast {
         ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
             not {
@@ -237,3 +304,30 @@ task wrapper(type: Wrapper) {
 }
 
 apply from: 'extra.gradle'
+/*
+task buildWar(type: CubaWarBuilding) {
+    appProperties = [
+            'cuba.automaticDatabaseUpdate': true,
+            'cuba.webPort': 8080,
+            'cuba.connectionUrlList': 'http://localhost:8080/app-core'
+    ]
+    singleWar = false
+    includeContextXml = true
+    includeJdbcDriver = true
+    appHome = './app_home'
+}
+
+*/
+task buildWar(type: CubaWarBuilding) {
+    appHome = './app_home'
+    singleWar = false
+    includeContextXml = true
+    includeJdbcDriver = true
+    appProperties = ['cuba.automaticDatabaseUpdate': true]
+    coreContextXmlPath = 'modules/core/web/META-INF/context.xml'
+    appProperties = [
+            'cuba.automaticDatabaseUpdate': true,
+            'cuba.webPort': 8080,
+            'cuba.connectionUrlList': 'http://localhost:8080/app-core'
+    ]
+}

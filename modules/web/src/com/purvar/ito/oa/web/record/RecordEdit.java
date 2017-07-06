@@ -2,6 +2,7 @@ package com.purvar.ito.oa.web.record;
 
 import com.haulmont.chile.core.model.Session;
 import com.haulmont.cuba.core.entity.FileDescriptor;
+import com.haulmont.cuba.core.global.FileLoader;
 import com.haulmont.cuba.core.global.FileStorageException;
 import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.haulmont.cuba.gui.components.Embedded;
@@ -33,6 +34,8 @@ public class RecordEdit extends AbstractEditor<Record> {
     private Embedded embedded;
     @Inject
     private Embedded map;
+    @Inject
+    private FileLoader fileLoader;
 
 
     @Override
@@ -92,22 +95,32 @@ public class RecordEdit extends AbstractEditor<Record> {
                 "<style type=\"text/css\">  \n" +
                 "html,body{  \n" +
                 "    width:100%;  \n" +
-                "    height:400px;\n" +
+                "    height:100%;\n" +
                 "    margin:0;\n" +
                 "    overflow:hidden;  \n" +
                 "    }\n" +
                 "</style>  \n" +
                 "</head>  \n" +
                 "<body>  \n" +
-                "    <div style=\"width:100%;height:400px;border:1px solid gray\" id=\"container\"</div>  \n" +
+                "    <div style=\"width:100%;height:100%;border:1px solid gray\" id=\"container\"</div>  \n" +
                 "</body>  \n" +
                 "</html>  \n" +
                 "<script type=\"text/javascript\">  \n" +
                 "    var map = new BMap.Map(\"container\");  \n" +
-                "    map.centerAndZoom(new BMap.Point("+coor+"), 13);  \n" +
+                "    map.centerAndZoom(new BMap.Point("+coor+"), 19);  \n" +
                 "    map.enableScrollWheelZoom();  \n" +
                 "    var marker=new BMap.Marker(new BMap.Point("+coor+"));  \n" +
-                "    map.addOverlay(marker);  </script>";
+                "    map.addOverlay(marker);    " +
+                "   // 添加带有定位的导航控件\n" +
+                "  var navigationControl = new BMap.NavigationControl({\n" +
+                "    // 靠左上角位置\n" +
+                "    anchor: BMAP_ANCHOR_TOP_LEFT,\n" +
+                "    // LARGE类型\n" +
+                "    type: BMAP_NAVIGATION_CONTROL_LARGE,\n" +
+                "    // 启用显示定位\n" +
+                "    enableGeolocation: true\n" +
+                "  });\n" +
+                "  map.addControl(navigationControl);</script>";
         String browserCacheVersion = UUID.randomUUID().toString();
 
 
@@ -118,14 +131,17 @@ public class RecordEdit extends AbstractEditor<Record> {
     @Override
     protected void postInit() {
         FileDescriptor userImageFile = getItem().getFile();
+        try {
+            if(userImageFile != null && fileLoader.fileExists(userImageFile)) {
+                FileDataProvider dataProvider = new FileDataProvider(userImageFile);
+                embedded.setSource(userImageFile.getId() + "." + userImageFile.getExtension(), dataProvider);
 
-        if(userImageFile != null) {
-
-            FileDataProvider dataProvider = new FileDataProvider(userImageFile);
-            embedded.setSource(userImageFile.getId() + "." + userImageFile.getExtension(), dataProvider);
+            } else {
+                embedded.setSource("theme://images/default-img.png");
+            }
+        } catch (FileStorageException e) {
+            embedded.setSource("theme://images/default-img.png");
         }
-
-
 
     }
 

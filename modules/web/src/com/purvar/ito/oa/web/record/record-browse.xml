@@ -33,17 +33,24 @@
                 <action id="remove"/>
             </actions>
             <columns>
-                <column id="district"/>
-                <column id="province"/>
-                <column id="address"/>
                 <column id="user"
+                        caption="用户"
                         generator="generateUserCell"/>
+                <column id="province"
+                        caption="省份"/>
+                <column id="district"
+                        caption="城市"/>
+                <column id="address"
+                        caption="地址"/>
+                <column id="createTs"
+                        caption="时间"/>
                 <column id="file"
+                        caption="图片"
                         generator="generateFileCell"/>
-                <column id="createTs"/>
-                <column id="ip"/>
-                <column id="lng"/>
-                <column id="lat"/>
+                <column id="lng"
+                        caption="经度"/>
+                <column id="lat"
+                        caption="纬度"/>
             </columns>
             <rows datasource="recordsDs"/>
             <rowsCount/>

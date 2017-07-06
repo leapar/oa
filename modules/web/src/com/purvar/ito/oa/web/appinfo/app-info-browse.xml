@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="com.purvar.ito.oa.web.appinfo.AppInfoBrowse"
+        focusComponent="appInfoesTable"
+        lookupComponent="appInfoesTable"
+        messagesPack="com.purvar.ito.oa.web.appinfo">
+    <dsContext>
+        <datasource id="appInfoDs"
+                    class="com.purvar.ito.oa.entity.AppInfo"
+                    view="_local"/>
+        <groupDatasource id="appInfoesDs"
+                         class="com.purvar.ito.oa.entity.AppInfo"
+                         view="_local">
+            <query>
+                <![CDATA[select e from oa$AppInfo e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <actions>
+        <action id="save"
+                caption="mainMsg://actions.Ok"
+                icon="icons/ok.png"
+                invoke="save"
+                shortcut="CTRL-ENTER"/>
+        <action id="cancel"
+                caption="mainMsg://actions.Cancel"
+                icon="icons/cancel.png"
+                invoke="cancel"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <split id="split"
+               height="100%"
+               orientation="horizontal"
+               reversePosition="true"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="appInfoesTable"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="appInfoesTable"
+                        datasource="appInfoesDs">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="appInfoesTable"
+                            width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="android"/>
+                        <column id="ver"/>
+                        <column id="ios"/>
+                    </columns>
+                    <rows datasource="appInfoesDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="appInfoesTable.create"/>
+                        <button id="editBtn"
+                                action="appInfoesTable.edit"/>
+                        <button id="removeBtn"
+                                action="appInfoesTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </vbox>
+            <vbox id="editBox"
+                  expand="fieldGroupBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <vbox id="fieldGroupBox">
+                    <fieldGroup id="fieldGroup"
+                                datasource="appInfoDs">
+                        <column width="250px">
+                            <field property="android"/>
+                            <field property="ver"/>
+                            <field property="ios"/>
+                        </column>
+                    </fieldGroup>
+                </vbox>
+                <hbox id="actionsPane"
+                      spacing="true"
+                      visible="false">
+                    <button id="saveBtn"
+                            action="save"/>
+                    <button id="cancelBtn"
+                            action="cancel"/>
+                </hbox>
+            </vbox>
+        </split>
+    </layout>
+</window>

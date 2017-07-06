@@ -43,6 +43,19 @@ public class Record extends StandardEntity {
     @JoinColumn(name = "USER_ID")
     protected User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "THUMB_ID")
+    protected FileDescriptor thumb;
+
+    public void setThumb(FileDescriptor thumb) {
+        this.thumb = thumb;
+    }
+
+    public FileDescriptor getThumb() {
+        return thumb;
+    }
+
+
     public void setLat(Double lat) {
         this.lat = lat;
     }
