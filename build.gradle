@@ -129,7 +129,7 @@ configure(coreModule) {
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
         dbms = 'mysql'
-        host = '39.108.125.90'
+        host = '111111'
         dbName = 'oa'
         dbUser = 'root'
         dbPassword = 'Mysql*-+'
