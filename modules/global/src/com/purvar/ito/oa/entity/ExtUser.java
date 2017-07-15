@@ -2,14 +2,19 @@ package com.purvar.ito.oa.entity;
 
 import javax.persistence.Entity;
 import com.haulmont.cuba.core.entity.annotation.Extends;
+import com.haulmont.cuba.core.sys.AppContext;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.chile.core.annotations.NamePattern;
+import org.apache.commons.lang.StringUtils;
+
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.text.MessageFormat;
 
-@NamePattern("%s %s %s|company,area,name")
+//@NamePattern("%s|name")
+@NamePattern("#getCaption|login,name,area,company")
 @Extends(User.class)
 @Entity(name = "oa$ExtUser")
 public class ExtUser extends User {
@@ -23,11 +28,11 @@ public class ExtUser extends User {
     @JoinColumn(name = "STATUS_ID")
     protected UserStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "COMPANY_ID")
     protected Company company;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "AREA_ID")
     protected Area area;
 
@@ -86,5 +91,19 @@ public class ExtUser extends User {
         return api_token;
     }
 
+    public String getCaption() {
+        String pattern = AppContext.getProperty("cuba.user.namePattern");
+        if (StringUtils.isBlank(pattern)) {
+            pattern = "{2} [{1}-{0}]";
+        }
 
+
+
+        MessageFormat fmt = new MessageFormat(pattern);
+        return StringUtils.trimToEmpty(fmt.format(new Object[]{
+                StringUtils.trimToEmpty(area == null ? "" :area.getName()),
+                StringUtils.trimToEmpty(company == null ? "" : company.getName()),
+                StringUtils.trimToEmpty(name)
+        }));
+    }
 }

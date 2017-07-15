@@ -55,17 +55,13 @@
                         caption="省份"/>
                 <column id="district"
                         caption="城市"/>
-                <column id="address"
-                        caption="地址"/>
-                <column id="createTs"
-                        caption="时间"/>
                 <column id="file"
                         caption="图片"
                         generator="generateFileCell"/>
-                <column id="lng"
-                        caption="经度"/>
-                <column id="lat"
-                        caption="纬度"/>
+                <column id="createTs"
+                        caption="时间"/>
+                <column id="address"
+                        caption="地址"/>
             </columns>
             <rows datasource="recordsDs"/>
             <rowsCount/>
