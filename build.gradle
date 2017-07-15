@@ -120,19 +120,19 @@ configure(coreModule) {
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
         dbms = 'mysql'
-        host = 'localhost'
+        host = '39.108.125.90'
         dbName = 'oa'
         dbUser = 'root'
-        dbPassword = ''
+        dbPassword = 'Mysql*-+'
         connectionParams = '?useSSL=false&allowMultiQueries=true'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
         dbms = 'mysql'
-        host = 'localhost'
+        host = '39.108.125.90'
         dbName = 'oa'
         dbUser = 'root'
-        dbPassword = ''
+        dbPassword = 'Mysql*-+'
         connectionParams = '?useSSL=false&allowMultiQueries=true'
     }
 }

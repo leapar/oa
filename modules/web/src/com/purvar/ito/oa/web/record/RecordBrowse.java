@@ -27,6 +27,9 @@ public class RecordBrowse extends AbstractLookup {
         return userName;
     }
 
+
+
+
     public Component generateFileCell(Record entity) {
 
 

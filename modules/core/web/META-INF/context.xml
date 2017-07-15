@@ -5,9 +5,9 @@
               maxTotal="20"
               maxWaitMillis="5000"
               name="jdbc/CubaDS"
-              password=""
+              password="Mysql*-+"
               type="javax.sql.DataSource"
-              url="jdbc:mysql://localhost/oa?useSSL=false&amp;allowMultiQueries=true"
+              url="jdbc:mysql://39.108.125.90/oa?useSSL=false&amp;allowMultiQueries=true"
               username="root"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>

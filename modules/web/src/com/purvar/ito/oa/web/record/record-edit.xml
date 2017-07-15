@@ -12,50 +12,44 @@
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true">
-        <split height="100%"
+    <layout margin="true,false,false,false"
+            spacing="true">
+        <split id="split"
+               height="100%"
                orientation="vertical"
-               pos="200px"
+               pos="120px"
                width="100%">
             <vbox spacing="true">
                 <hbox spacing="true">
                     <fieldGroup id="fieldGroup"
                                 datasource="recordDs"
                                 editable="false"
-                                height="150px">
-                        <column width="400px">
+                                height="70px">
+                        <column width="200px">
                             <field caption="姓名"
                                    editable="false"
                                    property="user"/>
                             <field caption="省份"
                                    editable="false"
                                    property="province"/>
-                            <field caption="城市"
-                                   editable="false"
-                                   property="district"/>
-                            <field caption="地址"
-                                   editable="false"
-                                   property="address"/>
                         </column>
-                    </fieldGroup>
-                    <fieldGroup id="fieldgroup_1"
-                                datasource="recordDs"
-                                editable="false"
-                                height="150px">
-                        <column width="250px">
+                        <column width="200px">
                             <field caption="打卡时间"
                                    dateFormat="msg://dateTimeFormat"
                                    editable="false"
                                    property="createTs"/>
-                            <field editable="false"
-                                   property="ip"
-                                   visible="false"/>
-                            <field caption="纬度"
+                            <field caption="城市"
                                    editable="false"
-                                   property="lat"/>
-                            <field caption="经度"
+                                   property="district"/>
+                        </column>
+                        <column width="500px">
+                            <field id="latlng"
+                                   caption="纬度"
+                                   custom="true"
+                                   editable="false"/>
+                            <field caption="地址"
                                    editable="false"
-                                   property="lng"/>
+                                   property="address"/>
                         </column>
                     </fieldGroup>
                 </hbox>
@@ -65,7 +59,7 @@
                             permittedExtensions=".jpg,.jpeg,.png,.gif"
                             visible="false"/>
                     <button id="button"
-                            caption="Close"
+                            caption="msg://Close"
                             invoke="onButtonClick"
                             width="100px"/>
                     <frame screen="editWindowActions"

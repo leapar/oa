@@ -14,6 +14,16 @@
                 <![CDATA[select e from oa$Record e]]>
             </query>
         </groupDatasource>
+        <collectionDatasource id="newDs"
+                              allowCommit="false"
+                              class="com.purvar.ito.oa.entity.Record"
+                              datasourceClass="com.purvar.ito.oa.web.record.RecordDatasource"
+                              loadDynamicAttributes="true"
+                              view="record-view">
+            <query>
+                <![CDATA[select e from oa$Record e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -27,10 +37,15 @@
         <groupTable id="recordsTable"
                     width="100%">
             <actions>
-                <action id="create"/>
+                <action id="create"
+                        enable="false"
+                        visible="false"/>
                 <action id="excel"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="edit"
+                        visible="false"/>
+                <action id="remove"
+                        enable="false"
+                        visible="false"/>
             </actions>
             <columns>
                 <column id="user"
@@ -61,7 +76,7 @@
                         visible="false"/>
                 <button id="excelButton"
                         action="recordsTable.excel"
-                        caption="Excel"/>
+                        caption="msg://Excel"/>
                 <button id="editBtn"
                         action="recordsTable.edit"
                         visible="false"/>

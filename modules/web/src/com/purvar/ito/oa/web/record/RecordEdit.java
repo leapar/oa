@@ -1,16 +1,16 @@
 package com.purvar.ito.oa.web.record;
 
+import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.Session;
 import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.global.FileLoader;
 import com.haulmont.cuba.core.global.FileStorageException;
-import com.haulmont.cuba.gui.components.AbstractEditor;
-import com.haulmont.cuba.gui.components.Embedded;
-import com.haulmont.cuba.gui.components.FileUploadField;
-import com.haulmont.cuba.gui.components.Window;
+import com.haulmont.cuba.gui.AppConfig;
+import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.data.DataSupplier;
 import com.haulmont.cuba.gui.export.FileDataProvider;
 import com.haulmont.cuba.gui.upload.FileUploadingAPI;
+import com.haulmont.cuba.gui.xml.layout.ComponentsFactory;
 import com.haulmont.cuba.security.global.UserSession;
 import com.purvar.ito.oa.entity.Record;
 
@@ -18,7 +18,11 @@ import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.UUID;
+
+import com.haulmont.cuba.gui.data.Datasource;
 
 public class RecordEdit extends AbstractEditor<Record> {
 
@@ -36,7 +40,12 @@ public class RecordEdit extends AbstractEditor<Record> {
     private Embedded map;
     @Inject
     private FileLoader fileLoader;
+    @Inject
+    private ComponentsFactory componentsFactory;
 
+    private TextField txtLatLng;
+    @Inject
+    private SplitPanel split;
 
     @Override
     public void init(Map<String, Object> params) {
@@ -65,9 +74,13 @@ public class RecordEdit extends AbstractEditor<Record> {
         upload.addFileUploadErrorListener(event ->
                 showNotification("File upload error", NotificationType.HUMANIZED));
 
+        txtLatLng = componentsFactory.createComponent(TextField.class);
 
 
-        
+        FieldGroup fields = (FieldGroup) getComponent("fieldGroup");
+        FieldGroup.FieldConfig field = fields.getField("latlng");
+        field.setComponent(txtLatLng);
+
     }
 
     @Override
@@ -126,10 +139,14 @@ public class RecordEdit extends AbstractEditor<Record> {
 
         map.setSource("report" + browserCacheVersion + ".htm",
                 new ByteArrayInputStream(htmlData.getBytes(StandardCharsets.UTF_8)));
+          
     }
 
     @Override
     protected void postInit() {
+        split.setSplitPosition(140,Component.UNITS_PIXELS);
+        txtLatLng.setEditable(false);
+        txtLatLng.setValue(getItem().getLat()+","+getItem().getLng());
         FileDescriptor userImageFile = getItem().getFile();
         try {
             if(userImageFile != null && fileLoader.fileExists(userImageFile)) {
@@ -146,6 +163,7 @@ public class RecordEdit extends AbstractEditor<Record> {
     }
 
     public void onButtonClick() {
-        this.close(Window.CLOSE_ACTION_ID);
+        this.close(Editor.WINDOW_CLOSE);
     }
+
 }

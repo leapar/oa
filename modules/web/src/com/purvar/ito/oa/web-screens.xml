@@ -31,4 +31,6 @@
             template="com/purvar/ito/oa/web/extuser/ext-user-browse2.xml"/>
     <screen id="oa$AppInfo.browse"
             template="com/purvar/ito/oa/web/appinfo/app-info-browse.xml"/>
+    <screen id="mainWindow"
+            template="com/purvar/ito/oa/web/record/ext-mainwindow.xml"/>
 </screen-config>

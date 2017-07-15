@@ -39,6 +39,8 @@
                         caption="姓名"/>
                 <column id="device_no"
                         caption="设备码"/>
+                <column id="createTs"
+                        caption="绑定时间"/>
                 <column id="action"
                         caption="操作"
                         generator="generateActionCell"/>
