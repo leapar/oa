@@ -35,6 +35,9 @@
             <properties include=".*"/>
         </filter>
         <groupTable id="recordsTable"
+                    contextMenuEnabled="false"
+                    multiLineCells="true"
+                    presentations="true"
                     width="100%">
             <actions>
                 <action id="create"
@@ -48,9 +51,8 @@
                         visible="false"/>
             </actions>
             <columns>
-                <column id="user"
-                        caption="用户"
-                        generator="generateUserCell"/>
+                <column id="user.name"
+                        caption="用户"/>
                 <column id="province"
                         caption="省份"/>
                 <column id="district"

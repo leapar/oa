@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import java.text.MessageFormat;
 
 //@NamePattern("%s|name")
-@NamePattern("#getCaption|login,name,area,company")
+//@NamePattern("#getCaption|login,name,area,company")
 @Extends(User.class)
 @Entity(name = "oa$ExtUser")
 public class ExtUser extends User {
@@ -28,11 +28,11 @@ public class ExtUser extends User {
     @JoinColumn(name = "STATUS_ID")
     protected UserStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COMPANY_ID")
     protected Company company;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AREA_ID")
     protected Area area;
 
@@ -90,7 +90,7 @@ public class ExtUser extends User {
     public String getApi_token() {
         return api_token;
     }
-
+/*
     public String getCaption() {
         String pattern = AppContext.getProperty("cuba.user.namePattern");
         if (StringUtils.isBlank(pattern)) {
@@ -105,5 +105,5 @@ public class ExtUser extends User {
                 StringUtils.trimToEmpty(company == null ? "" : company.getName()),
                 StringUtils.trimToEmpty(name)
         }));
-    }
+    }*/
 }

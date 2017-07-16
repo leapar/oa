@@ -3,6 +3,7 @@
         caption="mainMsg://application.caption"
         class="com.purvar.ito.oa.web.record.ExtAppMainWindow"
         messagesPack="com.purvar.ito.oa.web.record"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd"
         xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
     <layout>
         <hbox id="horizontalWrap"
@@ -55,10 +56,11 @@
                            height="100%">
                 <main:initialLayout margin="true"
                                     spacing="true">
-                    <label id="welcomeLabel"
-                           align="MIDDLE_CENTER"
-                           stylename="c-welcome-text"
-                           value="mainMsg://application.welcomeText"/>
+                    <chart:xyChart id="xyChart"
+                                   caption="xychart"/>
+                    <chart:mapViewer/>
+                    <chart:stockChart/>
+                    <chart:serialChart/>
                 </main:initialLayout>
             </main:workArea>
         </hbox>
