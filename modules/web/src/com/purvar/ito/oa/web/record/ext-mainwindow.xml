@@ -5,6 +5,19 @@
         messagesPack="com.purvar.ito.oa.web.record"
         xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd"
         xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
+    <dsContext>
+        <collectionDatasource id="countryGrowthDs"
+                              class="com.purvar.ito.oa.entity.RecordGroup"
+                              refreshMode="NEVER"/>
+        <collectionDatasource id="recordsDs"
+                              allowCommit="false"
+                              class="com.purvar.ito.oa.entity.Record"
+                              view="_local">
+            <query>
+                <![CDATA[select count(*),e.district from oa$Record e group by e.district]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
     <layout>
         <hbox id="horizontalWrap"
               expand="workArea"
@@ -56,11 +69,110 @@
                            height="100%">
                 <main:initialLayout margin="true"
                                     spacing="true">
-                    <chart:xyChart id="xyChart"
-                                   caption="xychart"/>
-                    <chart:mapViewer/>
-                    <chart:stockChart/>
-                    <chart:serialChart/>
+                    <vbox height="100%"
+                          spacing="true">
+                        <chart:serialChart id="serialChart"
+                                           autoMarginOffset="20"
+                                           categoryField="date"
+                                           datasource="countryGrowthDs"
+                                           height="100%"
+                                           marginLeft="40"
+                                           marginRight="40"
+                                           marginTop="50"
+                                           mouseWheelZoomEnabled="true"
+                                           theme="LIGHT"
+                                           dataDateFormat="YYYY-MM-DD"
+                                           width="100%">
+                            <chart:valueAxes>
+                                <chart:axis id="v1"
+                                            axisAlpha="0"
+                                            ignoreAxisWidth="true"
+                                            position="LEFT"/>
+                            </chart:valueAxes>
+                            <chart:balloon borderThickness="1"
+                                           shadowAlpha="0"/>
+                            <chart:graphs>
+                                <chart:graph id="g1"
+                                             balloonText="&lt;span style=&apos;font-size:18px;&apos;&gt;[[value]]&lt;/span&gt;"
+                                             bullet="ROUND"
+                                             bulletBorderAlpha="1"
+                                             bulletColor="WHITE"
+                                             bulletSize="5"
+                                             hideBulletsCount="50"
+                                             lineThickness="2"
+                                             title="Red line"
+                                             useLineColorForBulletBorder="true"
+                                             valueField="value">
+                                    <chart:balloon adjustBorderColor="false"
+                                                   color="WHITE"
+                                                   drop="true"/>
+                                </chart:graph>
+                            </chart:graphs>
+                            <chart:categoryAxis dashLength="1"
+                                                minorGridEnabled="true"/>
+                            <chart:chartScrollbar autoGridCount="true"
+                                                  backgroundAlpha="0"
+                                                  color="#AAAAAA"
+                                                  graph="g1"
+                                                  graphFillAlpha="0"
+                                                  graphLineAlpha="0.5"
+                                                  offset="30"
+                                                  oppositeAxis="false"
+                                                  scrollbarHeight="40"
+                                                  selectedBackgroundAlpha="0.1"
+                                                  selectedBackgroundColor="#888888"
+                                                  selectedGraphFillAlpha="0"
+                                                  selectedGraphLineAlpha="1"/>
+                            <chart:chartCursor cursorAlpha="1"
+                                               cursorColor="#258cbb"
+                                               cursorPosition="MOUSE"
+                                               limitToGraph="g1"
+                                               pan="true"
+                                               valueLineAlpha="0.2"
+                                               valueLineBalloonEnabled="true"
+                                               valueLineEnabled="true"
+                                               valueZoomable="true"/>
+                            <chart:valueScrollbar offset="50"
+                                                  oppositeAxis="false"
+                                                  scrollbarHeight="10"/>
+                            <chart:export/>
+
+                        </chart:serialChart>
+                        <hbox height="100%"
+                              spacing="true"
+                              width="100%">
+                            <chart:pieChart id="pie3dChart"
+                                            angle="30"
+                                            balloonText="[[title]]&lt;br&gt;&lt;span style=&apos;font-size:14px&apos;&gt;&lt;strong&gt;[[value]]&lt;/strong&gt; ([[percents]]%)&lt;/span&gt;"
+                                            depth3D="15"
+                                            height="100%"
+                                            outlineAlpha="0.4"
+                                            titleField="type"
+                                            valueField="count"
+                                            width="100%">
+                                <chart:legend autoMargins="false"
+                                              marginRight="80"
+                                              markerType="CIRCLE"
+                                              position="RIGHT"/>
+                                <chart:export/>
+                            </chart:pieChart>
+                            <chart:pieChart id="piechart_record"
+                                            angle="30"
+                                            balloonText="[[title]]&lt;br&gt;&lt;span style=&apos;font-size:14px&apos;&gt;&lt;strong&gt;[[value]]&lt;/strong&gt; ([[percents]]%)&lt;/span&gt;"
+                                            depth3D="15"
+                                            height="100%"
+                                            outlineAlpha="0.4"
+                                            titleField="district"
+                                            valueField="count"
+                                            width="100%">
+                                <chart:legend autoMargins="false"
+                                              marginRight="80"
+                                              markerType="CIRCLE"
+                                              position="RIGHT"/>
+                                <chart:export/>
+                            </chart:pieChart>
+                        </hbox>
+                    </vbox>
                 </main:initialLayout>
             </main:workArea>
         </hbox>

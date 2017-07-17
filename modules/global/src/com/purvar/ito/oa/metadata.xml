@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <metadata xmlns="http://schemas.haulmont.com/cuba/metadata.xsd">
-
-    <metadata-model root-package="com.purvar.ito.oa" namespace="oa"/>
-
+    <metadata-model namespace="oa"
+                    root-package="com.purvar.ito.oa">
+        <class>com.purvar.ito.oa.entity.RecordGroup</class>
+    </metadata-model>
 </metadata>

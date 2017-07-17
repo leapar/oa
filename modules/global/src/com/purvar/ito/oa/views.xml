@@ -45,4 +45,13 @@
         <property name="user"
                   view="_minimal"/>
     </view>
+    <view class="com.purvar.ito.oa.entity.Record"
+          extends="_local"
+          name="record-view_1">
+        <property name="createTs"/>
+    </view>
+    <view class="com.purvar.ito.oa.entity.ExtUser"
+          extends="_local"
+          name="extUser-view">
+    </view>
 </views>
