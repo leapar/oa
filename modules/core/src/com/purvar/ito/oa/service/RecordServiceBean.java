@@ -36,12 +36,12 @@ public class RecordServiceBean implements RecordService {
     @Override
     public List<KeyValueEntity> getGroups(UUID groupId) {
         Calendar now = Calendar.getInstance();
-        now.set(Calendar.DAY_OF_MONTH,0);
+        now.set(Calendar.DAY_OF_MONTH,1);
         now.set(Calendar.HOUR_OF_DAY,0);
         now.set(Calendar.MINUTE,0);
         now.set(Calendar.SECOND,0);
 
-        String month = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(now.getTime());
+        String month = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now.getTime());
 
         EntityManager em = persistence.getEntityManager();
         Query query = em.createNativeQuery(

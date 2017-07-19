@@ -78,11 +78,14 @@
                                            height="100%"
                                            marginLeft="40"
                                            marginRight="40"
-                                           marginTop="50"
+                                           marginTop="10"
                                            mouseWheelZoomEnabled="true"
-                                           theme="LIGHT"
                                            dataDateFormat="YYYY-MM-DD"
+                                           creditsPosition="TOP_RIGHT"
+                                           theme="LIGHT"
                                            width="100%">
+
+
                             <chart:valueAxes>
                                 <chart:axis id="v1"
                                             axisAlpha="0"
@@ -97,7 +100,7 @@
                                              bullet="ROUND"
                                              bulletBorderAlpha="1"
                                              bulletColor="WHITE"
-                                             bulletSize="5"
+                                             bulletSize="10"
                                              hideBulletsCount="50"
                                              lineThickness="2"
                                              title="Red line"
@@ -108,16 +111,34 @@
                                                    drop="true"/>
                                 </chart:graph>
                             </chart:graphs>
+
                             <chart:categoryAxis dashLength="1"
-                                                minorGridEnabled="true"/>
+                                                minorGridEnabled="true"
+                                                minPeriod="DAYS"
+                                                parseDates="true">
+                                <chart:dateFormats
+                                >
+                                    <chart:dateFormat
+                                            period="DAYS"
+                                            format="MM-DD"
+                                    >
+                                    </chart:dateFormat>
+                                    <chart:dateFormat
+                                            period="MONTHS"
+                                            format="YYYY-MM-DD"
+                                    >
+
+                                    </chart:dateFormat>
+
+                                </chart:dateFormats>
+                            </chart:categoryAxis>
                             <chart:chartScrollbar autoGridCount="true"
                                                   backgroundAlpha="0"
                                                   color="#AAAAAA"
                                                   graph="g1"
                                                   graphFillAlpha="0"
                                                   graphLineAlpha="0.5"
-                                                  offset="30"
-                                                  oppositeAxis="false"
+                                                  oppositeAxis="true"
                                                   scrollbarHeight="40"
                                                   selectedBackgroundAlpha="0.1"
                                                   selectedBackgroundColor="#888888"
@@ -132,9 +153,10 @@
                                                valueLineBalloonEnabled="true"
                                                valueLineEnabled="true"
                                                valueZoomable="true"/>
-                            <chart:valueScrollbar offset="50"
-                                                  oppositeAxis="false"
-                                                  scrollbarHeight="10"/>
+                            <chart:valueScrollbar
+
+                                    oppositeAxis="true"
+                                    scrollbarHeight="10"/>
                             <chart:export/>
 
                         </chart:serialChart>
@@ -149,6 +171,7 @@
                                             outlineAlpha="0.4"
                                             titleField="type"
                                             valueField="count"
+                                            creditsPosition="TOP_LEFT"
                                             width="100%">
                                 <chart:legend autoMargins="false"
                                               marginRight="80"
@@ -164,6 +187,7 @@
                                             outlineAlpha="0.4"
                                             titleField="district"
                                             valueField="count"
+                                            creditsPosition="TOP_LEFT"
                                             width="100%">
                                 <chart:legend autoMargins="false"
                                               marginRight="80"

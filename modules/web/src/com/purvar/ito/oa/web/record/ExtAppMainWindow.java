@@ -60,28 +60,11 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         initLayoutAnalyzerContextMenu(logoImage);
         initLogoImage(logoImage);
         initFtsField(ftsField);
-        ListDataProvider dataProvider = new ListDataProvider();
-
-        List list = recordService.getGroups(userSession.getUser().getGroup().getId());
-
-        countryGrowthDs.refresh();
 
         initRecordPieChart();
         initUserPieChart();
+        initRecordSerialsChart();
 
-
-        for (int i = 0; i < list.size();i++) {
-            Object[] item = (Object[]) list.get(i);
-
-            try {
-                countryGrowthDs.includeItem(recordGroup((Long) item[0],new SimpleDateFormat("dd/MM/yyyy").parse((String) item[1])));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-           // dataProvider.addItem(new MapDataItem().add("value",item[0]).add("date",(String) item[1]/*new SimpleDateFormat("dd/MM/yyyy").parse((String) item[1])*/));
-
-        }
 /*
         dataProvider.addItem(transportCount(1994, 1587, 650, 121));
         dataProvider.addItem(transportCount(1995, 1567, 683, 146));
@@ -122,18 +105,34 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         return item;
     }
 
+    void initRecordSerialsChart() {
+        List list = recordService.getGroups(userSession.getUser().getGroup().getId());
+        countryGrowthDs.refresh();
+        for (int i = 0; i < list.size();i++) {
+            Object[] item = (Object[]) list.get(i);
+            try {
+                countryGrowthDs.includeItem(recordGroup((Long) item[0],new SimpleDateFormat("dd/MM/yyyy").parse((String) item[1])));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     void initUserPieChart() {
-        Calendar now = Calendar.getInstance();
-        now.set(Calendar.DAY_OF_MONTH,0);
+        /*Calendar now = Calendar.getInstance();
+        now.set(Calendar.DAY_OF_MONTH,1);
         now.set(Calendar.HOUR_OF_DAY,0);
         now.set(Calendar.MINUTE,0);
         now.set(Calendar.SECOND,0);
+        ValueLoadContext.createQuery(
+                "select count(e.id),e.type from oa$ExtUser e where e.createTs > :date  group by e.type")
+                .setParameter("date",now.getTime())*/
 
         ListDataProvider dataProvider = new ListDataProvider();
         ValueLoadContext context = ValueLoadContext.create()
-                .setQuery(ValueLoadContext.createQuery(
-                        "select count(e.id),e.type from oa$ExtUser e where e.createTs > :date  group by e.type")
-                        .setParameter("date",now.getTime())
+                .setQuery(
+                        ValueLoadContext.createQuery(
+                                "select count(e.id),e.type from oa$ExtUser e group by e.type")
                 )
                 .addProperty("count")
                 .addProperty("type");
@@ -163,7 +162,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
 
        // new Date(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         Calendar now = Calendar.getInstance();
-        now.set(Calendar.DAY_OF_MONTH,0);
+        now.set(Calendar.DAY_OF_MONTH,1);
         now.set(Calendar.HOUR_OF_DAY,0);
         now.set(Calendar.MINUTE,0);
         now.set(Calendar.SECOND,0);
