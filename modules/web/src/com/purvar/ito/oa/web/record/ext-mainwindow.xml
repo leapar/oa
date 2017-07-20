@@ -74,18 +74,16 @@
                         <chart:serialChart id="serialChart"
                                            autoMarginOffset="20"
                                            categoryField="date"
+                                           creditsPosition="TOP_RIGHT"
+                                           dataDateFormat="YYYY-MM-DD"
                                            datasource="countryGrowthDs"
                                            height="100%"
                                            marginLeft="40"
                                            marginRight="40"
                                            marginTop="10"
                                            mouseWheelZoomEnabled="true"
-                                           dataDateFormat="YYYY-MM-DD"
-                                           creditsPosition="TOP_RIGHT"
                                            theme="LIGHT"
                                            width="100%">
-
-
                             <chart:valueAxes>
                                 <chart:axis id="v1"
                                             axisAlpha="0"
@@ -111,25 +109,17 @@
                                                    drop="true"/>
                                 </chart:graph>
                             </chart:graphs>
-
                             <chart:categoryAxis dashLength="1"
-                                                minorGridEnabled="true"
                                                 minPeriod="DAYS"
+                                                minorGridEnabled="true"
                                                 parseDates="true">
-                                <chart:dateFormats
-                                >
-                                    <chart:dateFormat
-                                            period="DAYS"
-                                            format="MM-DD"
-                                    >
+                                <chart:dateFormats>
+                                    <chart:dateFormat format="MM-DD"
+                                                      period="DAYS">
                                     </chart:dateFormat>
-                                    <chart:dateFormat
-                                            period="MONTHS"
-                                            format="YYYY-MM-DD"
-                                    >
-
+                                    <chart:dateFormat format="YYYY-MM-DD"
+                                                      period="MONTHS">
                                     </chart:dateFormat>
-
                                 </chart:dateFormats>
                             </chart:categoryAxis>
                             <chart:chartScrollbar autoGridCount="true"
@@ -153,25 +143,24 @@
                                                valueLineBalloonEnabled="true"
                                                valueLineEnabled="true"
                                                valueZoomable="true"/>
-                            <chart:valueScrollbar
-
-                                    oppositeAxis="true"
-                                    scrollbarHeight="10"/>
+                            <chart:valueScrollbar oppositeAxis="true"
+                                                  scrollbarHeight="10"/>
                             <chart:export/>
-
                         </chart:serialChart>
                         <hbox height="100%"
                               spacing="true"
                               width="100%">
+                            <!--chart:mapViewer height="100%"
+                                             width="100%"/-->
                             <chart:pieChart id="pie3dChart"
                                             angle="30"
                                             balloonText="[[title]]&lt;br&gt;&lt;span style=&apos;font-size:14px&apos;&gt;&lt;strong&gt;[[value]]&lt;/strong&gt; ([[percents]]%)&lt;/span&gt;"
+                                            creditsPosition="TOP_LEFT"
                                             depth3D="15"
                                             height="100%"
                                             outlineAlpha="0.4"
                                             titleField="type"
                                             valueField="count"
-                                            creditsPosition="TOP_LEFT"
                                             width="100%">
                                 <chart:legend autoMargins="false"
                                               marginRight="80"
@@ -182,12 +171,12 @@
                             <chart:pieChart id="piechart_record"
                                             angle="30"
                                             balloonText="[[title]]&lt;br&gt;&lt;span style=&apos;font-size:14px&apos;&gt;&lt;strong&gt;[[value]]&lt;/strong&gt; ([[percents]]%)&lt;/span&gt;"
+                                            creditsPosition="TOP_LEFT"
                                             depth3D="15"
                                             height="100%"
                                             outlineAlpha="0.4"
                                             titleField="district"
                                             valueField="count"
-                                            creditsPosition="TOP_LEFT"
                                             width="100%">
                                 <chart:legend autoMargins="false"
                                               marginRight="80"
