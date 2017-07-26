@@ -1,6 +1,9 @@
 package com.purvar.ito.oa.web.record;
 
+import com.google.gwt.maps.client.LoadApi;
 import com.haulmont.charts.gui.components.charts.PieChart;
+import com.haulmont.charts.gui.components.map.MapViewer;
+import com.haulmont.charts.web.gui.components.map.google.WebGoogleMapViewer;
 import com.haulmont.cuba.core.entity.KeyValueEntity;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
@@ -20,8 +23,12 @@ import com.purvar.ito.oa.entity.Area;
 import com.purvar.ito.oa.entity.RecordGroup;
 import com.purvar.ito.oa.entity.UserType;
 import com.purvar.ito.oa.service.RecordService;
+import com.vaadin.tapio.googlemaps.GoogleMap;
+import com.vaadin.tapio.googlemaps.client.GoogleMapState;
 
 import javax.inject.Inject;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -50,7 +57,48 @@ public class ExtAppMainWindow extends AbstractMainWindow {
     private PieChart pie3dChart;
     @Inject
     private PieChart piechart_record;
+    //@Inject
+    //private MapViewer googleMap;
 
+    public static Object genericInvokMethod(Object obj, String methodName,
+                                            int paramCount, Object... params) {
+        Method method;
+        Object requiredObj = null;
+        Object[] parameters = new Object[paramCount];
+        Class<?>[] classArray = new Class<?>[paramCount];
+        for (int i = 0; i < paramCount; i++) {
+            parameters[i] = params[i];
+            classArray[i] = params[i].getClass();
+        }
+        try {
+            method = obj.getClass().getDeclaredMethod(methodName, classArray);
+            method.setAccessible(true);
+            requiredObj = method.invoke(obj, params);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return requiredObj;
+    }
+/*
+    @Override
+    public void ready() {
+        super.ready();
+
+        WebGoogleMapViewer mapViewer = (WebGoogleMapViewer)googleMap;
+        GoogleMap map = (GoogleMap) mapViewer.getComponent();
+
+        GoogleMapState state = (GoogleMapState) genericInvokMethod(map,"getState",0);
+
+        state.apiUrl = "www.google.cn";
+    }
+*/
     @Override
     public void init(Map<String, Object> params) {
         super.init(params);
@@ -64,6 +112,15 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         initRecordPieChart();
         initUserPieChart();
         initRecordSerialsChart();
+
+        /*WebGoogleMapViewer mapViewer = (WebGoogleMapViewer)googleMap;
+        GoogleMap map = (GoogleMap) mapViewer.getComponent();
+
+        GoogleMapState state = (GoogleMapState) genericInvokMethod(map,"getState",0);
+
+        state.apiUrl = "www.google.cn";*/
+
+       // map.gets
 
 /*
         dataProvider.addItem(transportCount(1994, 1587, 650, 121));
@@ -111,7 +168,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         for (int i = 0; i < list.size();i++) {
             Object[] item = (Object[]) list.get(i);
             try {
-                countryGrowthDs.includeItem(recordGroup((Long) item[0],new SimpleDateFormat("dd/MM/yyyy").parse((String) item[1])));
+                countryGrowthDs.includeItem(recordGroup((Long) item[0],new SimpleDateFormat("yyyy/MM/dd").parse((String) item[1])));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

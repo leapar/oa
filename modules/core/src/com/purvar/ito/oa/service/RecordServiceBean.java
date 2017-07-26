@@ -46,7 +46,7 @@ public class RecordServiceBean implements RecordService {
         EntityManager em = persistence.getEntityManager();
         Query query = em.createNativeQuery(
                 "SELECT \n" +
-                        "    count(*), DATE_FORMAT(o.create_ts,'%d/%m/%Y') \n" +
+                        "    count(*), DATE_FORMAT(o.create_ts,'%Y/%m/%d') \n" +
                         "FROM\n" +
                         "    oa_record o,sec_user s\n" +
                         "    where \n" +
@@ -56,7 +56,7 @@ public class RecordServiceBean implements RecordService {
                         "  select h.group_id from sec_group_hierarchy h\n" +
                         "  where h.group_id = #groupId or h.parent_id = #groupId\n" +
                         ") \n" +
-                        "GROUP BY DATE_FORMAT(o.create_ts,'%d/%m/%Y') \n" +
+                        "GROUP BY DATE_FORMAT(o.create_ts,'%Y/%m/%d') \n" +
                         "order by o.create_ts "
         );
 
