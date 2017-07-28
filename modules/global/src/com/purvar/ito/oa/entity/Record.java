@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import javax.validation.constraints.NotNull;
 
 @NamePattern("%s %s|user,address")
 @Table(name = "OA_RECORD")
@@ -46,6 +47,18 @@ public class Record extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "THUMB_ID")
     protected FileDescriptor thumb;
+
+    @Column(name = "BPM_FLAG")
+    protected Integer bpm_flag;
+
+    public void setBpm_flag(EnumBpmFlag bpm_flag) {
+        this.bpm_flag = bpm_flag == null ? null : bpm_flag.getId();
+    }
+
+    public EnumBpmFlag getBpm_flag() {
+        return bpm_flag == null ? null : EnumBpmFlag.fromId(bpm_flag);
+    }
+
 
     public void setThumb(FileDescriptor thumb) {
         this.thumb = thumb;

@@ -33,4 +33,8 @@
             template="com/purvar/ito/oa/web/appinfo/app-info-browse.xml"/>
     <screen id="mainWindow"
             template="com/purvar/ito/oa/web/record/ext-mainwindow.xml"/>
+    <screen id="oa$Record.bpm.browse"
+            template="com/purvar/ito/oa/web/record/record-bpm-browse.xml"/>
+    <screen id="oa$Record.bpm.edit"
+            template="com/purvar/ito/oa/web/record/record-bpm-edit.xml"/>
 </screen-config>

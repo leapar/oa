@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://bpmBrowseCaption"
+        class="com.purvar.ito.oa.web.record.RecordBpmBrowse"
+        focusComponent="recordsTable"
+        lookupComponent="recordsTable"
+        messagesPack="com.purvar.ito.oa.web.record">
+    <dsContext>
+        <groupDatasource id="recordsDs"
+                         class="com.purvar.ito.oa.entity.Record"
+                         view="_local">
+            <query>
+                <![CDATA[select e from oa$Record e where e.bpm_flag is not null]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <actions>
+        <action id="bpmCreate"
+                caption="msg://bpmRecordCreate"
+                invoke="create"/>
+        <action id="bpmEdit"
+                caption="msg://bpmRecordEdit"
+                invoke="onBpmEdit"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="recordsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="recordsTable"
+                datasource="recordsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="recordsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="lat"/>
+                <column id="lng"/>
+                <column id="district"/>
+                <column id="province"/>
+                <column id="address"/>
+                <column id="ip"/>
+                <column id="bpm_flag"/>
+            </columns>
+            <rows datasource="recordsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createButton"
+                        action="bpmCreate"/>
+                <button id="editBtn"
+                        action="bpmEdit"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

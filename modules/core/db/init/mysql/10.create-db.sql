@@ -67,6 +67,7 @@ create table OA_RECORD (
     FILE_ID varchar(32),
     USER_ID varchar(32),
     THUMB_ID varchar(32),
+    BPM_FLAG integer,
     --
     primary key (ID)
 )^
