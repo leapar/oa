@@ -4,7 +4,8 @@
         class="com.purvar.ito.oa.web.record.RecordEdit"
         datasource="recordDs"
         focusComponent="fieldGroup"
-        messagesPack="com.purvar.ito.oa.web.record">
+        messagesPack="com.purvar.ito.oa.web.record"
+        xmlns:app="http://schemas.company.com/agd/0.1/ui-component.xsd">
     <dsContext>
         <datasource id="recordDs"
                     class="com.purvar.ito.oa.entity.Record"
@@ -32,7 +33,6 @@
                             <field caption="省份"
                                    editable="false"
                                    property="province"/>
-                            <field property="bpm_flag"/>
                         </column>
                         <column width="200px">
                             <field caption="打卡时间"
@@ -76,13 +76,13 @@
                               width="100%"/>
                 </scrollBox>
                 <scrollBox>
-                    <embedded id="map"
-                              height="600px"
-                              src="url://https://doc.cuba-platform.com/manual-latest/index.html"
-                              type="BROWSER"
-                              width="100%"/>
+                    <app:baiduMap id="baiduMap" height="600px"
+                                  lat="0.0"
+                                  lng="0.0"
+                                  width="800px"/>
                 </scrollBox>
             </split>
         </split>
+
     </layout>
 </window>

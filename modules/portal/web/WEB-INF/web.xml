@@ -7,7 +7,6 @@
     <context-param>
         <param-name>appPropertiesConfig</param-name>
         <param-value>
-            classpath:cuba-portal-app.properties
             classpath:com/purvar/ito/oa/portal-app.properties
             /WEB-INF/local.app.properties
             "file:${catalina.base}/conf/app-portal/local.app.properties"

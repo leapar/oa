@@ -23,6 +23,7 @@ import java.util.TreeMap;
 import java.util.UUID;
 
 import com.haulmont.cuba.gui.data.Datasource;
+import com.purvar.ito.oa.gui.components.BaiduMap;
 
 public class RecordEdit extends AbstractEditor<Record> {
 
@@ -46,6 +47,8 @@ public class RecordEdit extends AbstractEditor<Record> {
     private TextField txtLatLng;
     @Inject
     private SplitPanel split;
+    @Inject
+    private BaiduMap baiduMap;
 
     @Override
     public void init(Map<String, Object> params) {
@@ -92,8 +95,16 @@ public class RecordEdit extends AbstractEditor<Record> {
     @Override
     public void ready() {
         super.ready();
-        // src="url://https://doc.cuba-platform.com/manual-latest/index.html"
 
+        baiduMap.setLat(getItem().getLat());
+        baiduMap.setLng(getItem().getLng());
+        // src="url://https://doc.cuba-platform.com/manual-latest/index.html"
+        /*
+        <embedded id="map"
+            height="600px"
+            src="url://https://doc.cuba-platform.com/manual-latest/index.html"
+            type="BROWSER"
+            width="100%"/>
         Double lat = getItem().getLat();
         Double lng = getItem().getLng();
         String coor = String.format("%f,%f",lng,lat);
@@ -139,7 +150,7 @@ public class RecordEdit extends AbstractEditor<Record> {
 
         map.setSource("report" + browserCacheVersion + ".htm",
                 new ByteArrayInputStream(htmlData.getBytes(StandardCharsets.UTF_8)));
-          
+         */
     }
 
     @Override

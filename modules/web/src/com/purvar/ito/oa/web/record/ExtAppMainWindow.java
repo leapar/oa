@@ -189,7 +189,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         ValueLoadContext context = ValueLoadContext.create()
                 .setQuery(
                         ValueLoadContext.createQuery(
-                                "select count(e.id),e.type from oa$ExtUser e group by e.type")
+                                "select count(e.id),e.type from oa$ExtUser e group by e.type,e.status")
                 )
                 .addProperty("count")
                 .addProperty("type");

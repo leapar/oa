@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="http://schemas.purvar.com/oa/0.1/ui-component.xsd"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.purvar.com/oa/0.1/ui-component.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="baiduMap">
+        <xs:complexType>
+            <xs:attribute name="id"
+                          type="xs:string"/>
+            <xs:attribute name="caption" type="xs:string"/>
+            <xs:attribute name="width" type="xs:string"/>
+            <xs:attribute name="height" type="xs:string"/>
+            <xs:attribute name="datasource" type="xs:string"/>
+            <xs:attribute name="property" type="xs:string"/>
+            <xs:attribute name="zoom" type="xs:int"/>
+            <xs:attribute name="lat" type="xs:double"/>
+            <xs:attribute name="lng" type="xs:double"/>
+            <xs:attribute name="zoom_ctrl" type="xs:boolean" default="true"/>
+            <xs:attribute name="just_show" type="xs:boolean" default="true"/>
+
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

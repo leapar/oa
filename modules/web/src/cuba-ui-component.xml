@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<components xmlns="http://schemas.haulmont.com/cuba/components.xsd">
+    <component>
+        <name>baiduMap</name>
+        <componentLoader>com.purvar.ito.oa.gui.xml.layout.loaders.BaiduMapLoader</componentLoader>
+        <class>com.purvar.ito.oa.web.gui.components.WebBaiduMap</class>
+    </component>
+</components>
