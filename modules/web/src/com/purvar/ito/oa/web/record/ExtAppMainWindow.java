@@ -211,9 +211,9 @@ public class ExtAppMainWindow extends AbstractMainWindow {
     void initRecordPieChart() {
         ListDataProvider dataProvider = new ListDataProvider();
 
-        String query = "select count(e.id),e.district from oa$Record e  where e.createTs > :date group by e.district";
+        String query = "select count(e.id),e.district from oa$Record e  where e.createTs > :date and  (e.bpm_flag is null or e.bpm_flag = 2) group by e.district";
         if(userSession.getUser().getGroup().getName().equals("Company")) {
-            query = "select count(e.id),e.province as district from oa$Record e where e.createTs > :date group by e.province";
+            query = "select count(e.id),e.province as district from oa$Record e where e.createTs > :date  and  (e.bpm_flag is null or e.bpm_flag = 2) group by e.province";
         }
 
 
