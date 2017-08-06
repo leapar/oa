@@ -24,6 +24,8 @@
             <map>
                 <entry key="oa_RecordService"
                        value="com.purvar.ito.oa.service.RecordService"/>
+                <entry key="oa_UserService"
+                       value="com.purvar.ito.oa.service.UserService"/>
             </map>
         </property>
     </bean>

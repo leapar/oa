@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.purvar.ito.oa.web.screens.ExtProcActorsFrame"
+        extends="/com/haulmont/bpm/gui/procactor/proc-actors-frame.xml"
+        messagesPack="com.purvar.ito.oa.web.screens">
+    <dsContext>
+        <collectionDatasource id="extUsersDs"
+                              class="com.purvar.ito.oa.entity.ExtUser"
+                              datasourceClass="com.purvar.ito.oa.entity.BossUserDs"
+                              view="extUser-view"/>
+    </dsContext>
+    <layout>
+        <table id="procActorsTable">
+            <columns>
+                <column id="user"
+                        editable="false"/>
+            </columns>
+            <buttonsPanel enable="false"
+                          visible="false">
+                <lookupField id="procRolesLookup"
+                             editable="false"
+                             enable="false"
+                             nullOptionVisible="false"
+                             visible="false"/>
+                <button id="procActorRemoveBtn"
+                        action="procActorsTable.remove"
+                visible="false"/>
+                <button id="button"
+                        caption="aaaaaa"
+                        enable="false"
+                        visible="false"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

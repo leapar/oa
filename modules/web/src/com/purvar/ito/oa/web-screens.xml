@@ -37,4 +37,8 @@
             template="com/purvar/ito/oa/web/record/record-bpm-browse.xml"/>
     <screen id="oa$Record.bpm.edit"
             template="com/purvar/ito/oa/web/record/record-bpm-edit.xml"/>
+    <screen id="recordBpmProcForm"
+            template="com/purvar/ito/oa/web/screens/ext-standard-proc-form.xml"/>
+    <screen id="procActorsFrame"
+            template="com/purvar/ito/oa/web/screens/ext-proc-actors-frame.xml"/>
 </screen-config>

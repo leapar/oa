@@ -8,6 +8,12 @@ import elemental.json.JsonObject;
 @JavaScript({"baidumapview-connector.js", "jquery-ui.js", "http://api.map.baidu.com/getscript?v=2.0&ak=ev8KAaHPxMsFZEpGv0pTWz4D7KFUVLSq&services=&t=20170728132058"})
 @StyleSheet({"jquery-ui.css"})
 public class BaiduMapView extends AbstractJavaScriptComponent {
+    public interface ValueChangeListener {
+        void valueChanged(BaiduMapViewState state);
+    }
+
+    private ValueChangeListener listener;
+
     public BaiduMapView() {
         addFunction("valueChanged", arguments -> {
             /*JsonArray array = arguments.getNumber(0);
@@ -22,8 +28,18 @@ public class BaiduMapView extends AbstractJavaScriptComponent {
             this.setDistrict(object.getString("district"));
             this.setLat(object.getObject("point").getNumber("lat"));
             this.setLng(object.getObject("point").getNumber("lng"));
+
+            this.listener.valueChanged(this.getState());
             //System.console().writer().println("sssss");
         });
+    }
+
+    public ValueChangeListener getListener() {
+        return listener;
+    }
+
+    public void setListener(ValueChangeListener listener) {
+        this.listener = listener;
     }
 
     @Override

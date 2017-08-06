@@ -42,7 +42,6 @@ public class RecordServiceBean implements RecordService {
         now.set(Calendar.MINUTE,0);
         now.set(Calendar.SECOND,0);
 
-
         String month = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now.getTime());
 
         EntityManager em = persistence.getEntityManager();
@@ -53,6 +52,7 @@ public class RecordServiceBean implements RecordService {
                         "    oa_record o,sec_user s\n" +
                         "    where \n" +
                         "    o.user_id = s.id and \n" +
+                        " (o.bpm_flag is null or o.bpm_flag = 2) and  \n" +
                         "  o.create_ts > #month and " +
                         "    s.group_id in (\n" +
                         "  select h.group_id from sec_group_hierarchy h\n" +

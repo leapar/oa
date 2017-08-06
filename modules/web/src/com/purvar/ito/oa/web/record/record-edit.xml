@@ -5,7 +5,7 @@
         datasource="recordDs"
         focusComponent="fieldGroup"
         messagesPack="com.purvar.ito.oa.web.record"
-        xmlns:app="http://schemas.company.com/agd/0.1/ui-component.xsd">
+        xmlns:app="http://schemas.purvar.com/agd/0.1/ui-component.xsd">
     <dsContext>
         <datasource id="recordDs"
                     class="com.purvar.ito.oa.entity.Record"

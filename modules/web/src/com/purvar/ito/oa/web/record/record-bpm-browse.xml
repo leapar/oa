@@ -8,7 +8,7 @@
     <dsContext>
         <groupDatasource id="recordsDs"
                          class="com.purvar.ito.oa.entity.Record"
-                         view="_local">
+                         view="record-view_1">
             <query>
                 <![CDATA[select e from oa$Record e where e.bpm_flag is not null]]>
             </query>
@@ -41,11 +41,13 @@
             <columns>
                 <column id="lat"/>
                 <column id="lng"/>
-                <column id="district"/>
                 <column id="province"/>
+                <column id="district"/>
                 <column id="address"/>
-                <column id="ip"/>
                 <column id="bpm_flag"/>
+                <column id="createdBy"/>
+                <column id="createTs"/>
+                <column id="user"/>
             </columns>
             <rows datasource="recordsDs"/>
             <rowsCount/>

@@ -5,21 +5,25 @@ com_purvar_ito_oa_web_toolkit_ui_baidumapview_BaiduMapView = function() {
     $(element).html("<div id=\"allmap\"></div>");
    // $("#allmap").css("padding", "5px 10px");
     $("#allmap").css("width", state.width).css("height", state.height);
-    console.log("onStateChange","init",JSON.stringify(state),state.width,state.height);
 
-    connector.onStateChange = function() {
-        var state = connector.getState();
-        /*slider.slider("values", state.values);
-         slider.slider("option", "min", state.minValue);
-         slider.slider("option", "max", state.maxValue);
-         $(element).width(state.width);*/
-        //alert(JSON.stringify(info));
-        console.log("onStateChange",JSON.stringify(state),state.width,state.height);
 
-        $("#allmap").css("width", state.width).css("height", state.height);
-        var point = new BMap.Point(state.lng, state.lat);
-        map.panTo(point);
+    if(state.justShow) {
+        console.log("onStateChange","init",JSON.stringify(state),state.width,state.height);
+        connector.onStateChange = function() {
+            var state = connector.getState();
+            /*slider.slider("values", state.values);
+             slider.slider("option", "min", state.minValue);
+             slider.slider("option", "max", state.maxValue);
+             $(element).width(state.width);*/
+            //alert(JSON.stringify(info));
+            console.log("onStateChange",JSON.stringify(state),state.width,state.height);
+
+            $("#allmap").css("width", state.width).css("height", state.height);
+            var point = new BMap.Point(state.lng, state.lat);
+            map.panTo(point);
+        }
     }
+
 
 
     // 百度地图API功能
@@ -85,7 +89,9 @@ com_purvar_ito_oa_web_toolkit_ui_baidumapview_BaiduMapView = function() {
             doGeoCoder(map.getCenter());
         });
     }
-
+    if(!state.justShow) {
+        doGeoCoder(map.getCenter());
+    }
 
     function doGeoCoder(pt) {
         geoc.getLocation(pt, function(rs){

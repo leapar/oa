@@ -4,29 +4,49 @@
         class="com.purvar.ito.oa.web.record.RecordBpmEdit"
         datasource="recordDs"
         focusComponent="fieldGroup"
-        messagesPack="com.purvar.ito.oa.web.record">
+        messagesPack="com.purvar.ito.oa.web.record"
+        xmlns:app="http://schemas.purvar.com/agd/0.1/ui-component.xsd">
     <dsContext>
         <datasource id="recordDs"
                     class="com.purvar.ito.oa.entity.Record"
-                    view="_local"/>
+                    view="record-view_1"/>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="recordDs">
-            <column width="250px">
-                <field property="lat"/>
-                <field property="lng"/>
-                <field property="district"/>
-                <field property="province"/>
-                <field property="address"/>
-                <field property="ip"/>
-                <field property="bpm_flag"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+    <layout>
+        <vbox spacing="true">
+            <fieldGroup id="fieldGroup"
+                        datasource="recordDs">
+                <column width="250px">
+                    <field editable="false"
+                           property="province"/>
+                    <field editable="false"
+                           property="district"/>
+                    <field editable="false"
+                           property="address"/>
+                    <field editable="false" property="createTs"/>
+                    <field editable="false"
+                           property="lat"
+                           visible="false"/>
+                    <field editable="false"
+                           property="lng"
+                           visible="false"/>
+                </column>
+            </fieldGroup>
+            <buttonsPanel>
+                <button id="windowClose"
+                        action="windowClose"
+                        icon="100"/>
+                <frame id="procActionsFrame"
+                       screen="procActionsFrame"/>
+            </buttonsPanel>
+            <app:baiduMap id="baiduMap"
+                          height="400px"
+                          just_show="true"
+                          lat="30.47919"
+                          lng="114.427299"
+                          width="800px"
+                          zoom="10"/>
+        </vbox>
     </layout>
 </window>

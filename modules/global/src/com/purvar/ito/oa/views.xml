@@ -49,6 +49,9 @@
           extends="_local"
           name="record-view_1">
         <property name="createTs"/>
+        <property name="user"
+                  view="_minimal"/>
+        <property name="createdBy"/>
     </view>
     <view class="com.purvar.ito.oa.entity.ExtUser"
           extends="_local"
