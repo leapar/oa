@@ -10,7 +10,7 @@
                          class="com.purvar.ito.oa.entity.Record"
                          view="record-view_1">
             <query>
-                <![CDATA[select e from oa$Record e where e.bpm_flag is not null]]>
+                <![CDATA[select e from oa$Record e where e.bpm_flag is not null and e.createdBy = :session$userLogin]]>
             </query>
         </groupDatasource>
     </dsContext>
@@ -48,6 +48,7 @@
                 <column id="createdBy"/>
                 <column id="createTs"/>
                 <column id="user"/>
+                <column id="bpm_date"/>
             </columns>
             <rows datasource="recordsDs"/>
             <rowsCount/>

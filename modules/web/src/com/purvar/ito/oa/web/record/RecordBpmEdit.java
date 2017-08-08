@@ -36,15 +36,13 @@ public class RecordBpmEdit extends AbstractEditor<Record> {
     WebTextField lngField;
     @Inject
     private UserSession userSession;
-    private boolean openToCreate = false;
     @Override
     protected void initNewItem(Record item) {
-        openToCreate = true;
         super.initNewItem(item);
         baiduMap.setJustShow(false);
-        fieldGroup.getField("createTs").setEditable(true);
-        getItem().setUser(userSession.getUser());
-        getItem().setBpm_flag(EnumBpmFlag.START);
+        fieldGroup.getField("bpm_date").setEditable(true);
+        item.setUser(userSession.getUser());
+        item.setBpm_flag(EnumBpmFlag.START);
     }
 
     @Override
@@ -57,7 +55,7 @@ public class RecordBpmEdit extends AbstractEditor<Record> {
     }
     @Override
     protected boolean preCommit() {
-
+        procActionsFrame.getProcInstance().setEntityEditorName("oa$Record.bpm.edit");
 
         return super.preCommit();
     }

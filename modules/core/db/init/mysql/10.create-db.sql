@@ -68,6 +68,7 @@ create table OA_RECORD (
     USER_ID varchar(32),
     THUMB_ID varchar(32),
     BPM_FLAG integer,
+    BPM_DATE date,
     --
     primary key (ID)
 )^

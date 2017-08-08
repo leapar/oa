@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @NamePattern("%s %s|user,address")
 @Table(name = "OA_RECORD")
@@ -50,6 +53,19 @@ public class Record extends StandardEntity {
 
     @Column(name = "BPM_FLAG")
     protected Integer bpm_flag;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "BPM_DATE")
+    protected Date bpm_date;
+
+    public void setBpm_date(Date bpm_date) {
+        this.bpm_date = bpm_date;
+    }
+
+    public Date getBpm_date() {
+        return bpm_date;
+    }
+
 
     public void setBpm_flag(EnumBpmFlag bpm_flag) {
         this.bpm_flag = bpm_flag == null ? null : bpm_flag.getId();

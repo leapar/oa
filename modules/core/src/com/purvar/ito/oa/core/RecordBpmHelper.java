@@ -33,6 +33,7 @@ public class RecordBpmHelper {
             Record record = persistence.getEntityManager().find(Record.class, entityId);
             if (record != null) {
                 record.setBpm_flag(EnumBpmFlag.OK);
+                record.setCreateTs(record.getBpm_date());
             }
             tx.commit();
         }

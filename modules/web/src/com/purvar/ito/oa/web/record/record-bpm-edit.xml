@@ -23,20 +23,24 @@
                     <field editable="false"
                            property="district"/>
                     <field editable="false"
-                           property="address"/>
-                    <field editable="false" property="createTs"/>
+                           property="address"
+                           required="true"/>
                     <field editable="false"
                            property="lat"
                            visible="false"/>
                     <field editable="false"
                            property="lng"
                            visible="false"/>
+                    <field editable="false"
+                           property="bpm_date"
+                           required="true"
+                           requiredMessage="请选择补卡时间"/>
                 </column>
             </fieldGroup>
             <buttonsPanel>
                 <button id="windowClose"
                         action="windowClose"
-                        icon="100"/>
+                        icon="theme://actions.Editor.Cancel.icon"/>
                 <frame id="procActionsFrame"
                        screen="procActionsFrame"/>
             </buttonsPanel>

@@ -5,10 +5,7 @@ import com.haulmont.charts.gui.components.charts.PieChart;
 import com.haulmont.charts.gui.components.map.MapViewer;
 import com.haulmont.charts.web.gui.components.map.google.WebGoogleMapViewer;
 import com.haulmont.cuba.core.entity.KeyValueEntity;
-import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.LoadContext;
-import com.haulmont.cuba.core.global.ValueLoadContext;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.gui.components.AbstractMainWindow;
 import com.haulmont.cuba.gui.components.Embedded;
 import com.haulmont.cuba.gui.components.mainwindow.FtsField;
@@ -18,6 +15,9 @@ import com.haulmont.charts.gui.data.ListDataProvider;
 import com.haulmont.charts.gui.data.MapDataItem;
 import com.haulmont.charts.gui.components.charts.Chart;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
+import com.haulmont.cuba.security.entity.Group;
+import com.haulmont.cuba.security.entity.GroupHierarchy;
+import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.cuba.security.global.UserSession;
 import com.purvar.ito.oa.entity.Area;
 import com.purvar.ito.oa.entity.RecordGroup;
@@ -57,8 +57,6 @@ public class ExtAppMainWindow extends AbstractMainWindow {
     private PieChart pie3dChart;
     @Inject
     private PieChart piechart_record;
-    //@Inject
-    //private MapViewer googleMap;
 
     public static Object genericInvokMethod(Object obj, String methodName,
                                             int paramCount, Object... params) {
@@ -189,7 +187,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         ValueLoadContext context = ValueLoadContext.create()
                 .setQuery(
                         ValueLoadContext.createQuery(
-                                "select count(e.id),e.type from oa$ExtUser e group by e.type,e.status")
+                                "select count(e.id),e.type from oa$ExtUser e group by e.type")
                 )
                 .addProperty("count")
                 .addProperty("type");
@@ -212,11 +210,28 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         ListDataProvider dataProvider = new ListDataProvider();
 
         String query = "select count(e.id),e.district from oa$Record e  where e.createTs > :date and  (e.bpm_flag is null or e.bpm_flag = 2) group by e.district";
-        if(userSession.getUser().getGroup().getName().equals("Company")) {
-            query = "select count(e.id),e.province as district from oa$Record e where e.createTs > :date  and  (e.bpm_flag is null or e.bpm_flag = 2) group by e.province";
+
+
+
+        LoadContext loadContext =  LoadContext.create(GroupHierarchy.class);
+        loadContext.setQueryString("select a from sec$GroupHierarchy a where a.group.id=:groupId order by a.level desc").setParameter("groupId",userSession.getUser().getGroup());
+
+        List<GroupHierarchy> list = dataManager.loadList(loadContext);
+        if(list.size() == 0 || list.get(0).getLevel() < 2) {
+           // if(userSession.getUser().getGroup().getName().equals("Company")) {
+                query = "select count(e.id),e.province as district from oa$Record e where e.createTs > :date  and  (e.bpm_flag is null or e.bpm_flag = 2) group by e.province";
+           // }
         }
 
+/*
+        LoadContext<UserRole> ctx = LoadContext.create(UserRole.class)
 
+                .setQuery(new LoadContext.Query("select ur from sec$UserRole ur where ur.user.id = :user")
+                        .setParameter("user", userSession.getUser())
+                );
+
+        List<UserRole> userRoles = dataManager.loadList(ctx);
+*/
        // new Date(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         Calendar now = Calendar.getInstance();
         now.set(Calendar.DAY_OF_MONTH,1);
