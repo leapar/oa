@@ -1,0 +1,234 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/cuba-app/cuba-localize-behavior.html">
+<link rel="import" href="../../bower_components/cuba-ui/cuba-entity-edit-view-behavior.html">
+<link rel="import" href="../../bower_components/cuba-ui/cuba-lookup.html">
+<link rel="import" href="../../bower_components/cuba-data/cuba-entity.html">
+<link rel="import" href="../../bower_components/cuba-form/cuba-entity-form.html">
+<link rel="import" href="../../bower_components/cuba-file-field/cuba-file-field.html">
+<link rel="import" href="../../bower_components/cuba-styles/cuba-styles.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="oa-ext-user-edit">
+  <template>
+    <style include="cuba-styles"></style>
+    <style include="shared-styles"></style>
+    <style>
+      paper-card {
+        display: block;
+      }
+    </style>
+
+    <cuba-entity entity-name="oa$ExtUser" entity-id="[[entityId]]" view="user.edit" data="{{entity}}"></cuba-entity>
+    <cuba-entity-form id="form"
+                      entity-name="oa$ExtUser"
+                      entity="{{entity}}"
+                      on-cuba-form-response="_onSuccess"
+                      on-cuba-form-error="_onError"
+                      server-errors="{{serverErrors}}">
+      <paper-card>
+        <div class="card-content">
+
+        <paper-input value="{{entity.login}}"
+             label="[[msg('oa$ExtUser.login')]]"
+             required
+             maxlength="50"
+             error-message="[[serverErrors.login]]"
+             invalid="[[_isInvalid(serverErrors.login)]]">
+</paper-input>
+<paper-input value="{{entity.loginLowerCase}}"
+             label="[[msg('oa$ExtUser.loginLowerCase')]]"
+             required
+             maxlength="50"
+             error-message="[[serverErrors.loginLowerCase]]"
+             invalid="[[_isInvalid(serverErrors.loginLowerCase)]]">
+</paper-input>
+<paper-input value="{{entity.password}}"
+             label="[[msg('oa$ExtUser.password')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.password]]"
+             invalid="[[_isInvalid(serverErrors.password)]]">
+</paper-input>
+<paper-input value="{{entity.name}}"
+             label="[[msg('oa$ExtUser.name')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.name]]"
+             invalid="[[_isInvalid(serverErrors.name)]]">
+</paper-input>
+<paper-input value="{{entity.firstName}}"
+             label="[[msg('oa$ExtUser.firstName')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.firstName]]"
+             invalid="[[_isInvalid(serverErrors.firstName)]]">
+</paper-input>
+<paper-input value="{{entity.lastName}}"
+             label="[[msg('oa$ExtUser.lastName')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.lastName]]"
+             invalid="[[_isInvalid(serverErrors.lastName)]]">
+</paper-input>
+<paper-input value="{{entity.middleName}}"
+             label="[[msg('oa$ExtUser.middleName')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.middleName]]"
+             invalid="[[_isInvalid(serverErrors.middleName)]]">
+</paper-input>
+<paper-input value="{{entity.position}}"
+             label="[[msg('oa$ExtUser.position')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.position]]"
+             invalid="[[_isInvalid(serverErrors.position)]]">
+</paper-input>
+<paper-input value="{{entity.email}}"
+             label="[[msg('oa$ExtUser.email')]]"
+             
+             maxlength="100"
+             error-message="[[serverErrors.email]]"
+             invalid="[[_isInvalid(serverErrors.email)]]">
+</paper-input>
+<paper-input value="{{entity.language}}"
+             label="[[msg('oa$ExtUser.language')]]"
+             
+             maxlength="20"
+             error-message="[[serverErrors.language]]"
+             invalid="[[_isInvalid(serverErrors.language)]]">
+</paper-input>
+<paper-input value="{{entity.timeZone}}"
+             label="[[msg('oa$ExtUser.timeZone')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.timeZone]]"
+             invalid="[[_isInvalid(serverErrors.timeZone)]]">
+</paper-input>
+<paper-checkbox checked="{{entity.timeZoneAuto}}">[[msg('oa$ExtUser.timeZoneAuto')]]</paper-checkbox>
+<paper-checkbox checked="{{entity.active}}">[[msg('oa$ExtUser.active')]]</paper-checkbox>
+<paper-checkbox checked="{{entity.changePasswordAtNextLogon}}">[[msg('oa$ExtUser.changePasswordAtNextLogon')]]</paper-checkbox>
+<cuba-lookup picked-entity="{{entity.group}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="sec$Group" view="_minimal" data="{{entity_groupOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('oa$ExtUser.group')]]"
+                      items="[[entity_groupOptions]]"
+                      selected-item="{{entity.group}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.group.id]]"
+                      required
+                      error-message="[[serverErrors.group]]"
+                      invalid="[[_isInvalid(serverErrors.group)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<paper-input value="{{entity.ipMask}}"
+             label="[[msg('oa$ExtUser.ipMask')]]"
+             
+             maxlength="200"
+             error-message="[[serverErrors.ipMask]]"
+             invalid="[[_isInvalid(serverErrors.ipMask)]]">
+</paper-input>
+<cuba-lookup picked-entity="{{entity.type}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="oa$UserType" view="_minimal" data="{{entity_typeOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('oa$ExtUser.type')]]"
+                      items="[[entity_typeOptions]]"
+                      selected-item="{{entity.type}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.type.id]]"
+                      
+                      error-message="[[serverErrors.type]]"
+                      invalid="[[_isInvalid(serverErrors.type)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<cuba-lookup picked-entity="{{entity.status}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="oa$UserStatus" view="_minimal" data="{{entity_statusOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('oa$ExtUser.status')]]"
+                      items="[[entity_statusOptions]]"
+                      selected-item="{{entity.status}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.status.id]]"
+                      
+                      error-message="[[serverErrors.status]]"
+                      invalid="[[_isInvalid(serverErrors.status)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<cuba-lookup picked-entity="{{entity.company}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="oa$Company" view="_minimal" data="{{entity_companyOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('oa$ExtUser.company')]]"
+                      items="[[entity_companyOptions]]"
+                      selected-item="{{entity.company}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.company.id]]"
+                      
+                      error-message="[[serverErrors.company]]"
+                      invalid="[[_isInvalid(serverErrors.company)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<cuba-lookup picked-entity="{{entity.area}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="oa$Area" view="_minimal" data="{{entity_areaOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('oa$ExtUser.area')]]"
+                      items="[[entity_areaOptions]]"
+                      selected-item="{{entity.area}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.area.id]]"
+                      
+                      error-message="[[serverErrors.area]]"
+                      invalid="[[_isInvalid(serverErrors.area)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<paper-input value="{{entity.device_no}}"
+             label="[[msg('oa$ExtUser.device_no')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.device_no]]"
+             invalid="[[_isInvalid(serverErrors.device_no)]]">
+</paper-input>
+<paper-input value="{{entity.api_token}}"
+             label="[[msg('oa$ExtUser.api_token')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.api_token]]"
+             invalid="[[_isInvalid(serverErrors.api_token)]]">
+</paper-input>
+
+
+        </div>
+        <div class="card-actions">
+          <paper-button on-tap="_delete" hidden$="[[!entityId]]">
+            [[msg('Delete')]]
+          </paper-button>
+          <paper-button on-tap="_cancel">
+            [[msg('Cancel')]]
+          </paper-button>
+          <paper-button on-tap="_save">
+            [[msg('Save')]]
+          </paper-button>
+        </div>
+      </paper-card>
+    </cuba-entity-form>
+
+    <paper-toast id="errorMessage">[[msg('Failed to save')]]</paper-toast>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'oa-ext-user-edit',
+      behaviors: [CubaLocalizeBehavior, CubaEntityEditViewBehavior]
+    });
+  </script>
+</dom-module>

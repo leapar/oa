@@ -1,0 +1,13 @@
+{
+  "name": "oa",
+  "version": "0.0.1",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "merge-stream": "^1.0.1",
+    "polymer-build": "^1.5.1",
+    "polyserve": "^0.19.0"
+  },
+  "private": true
+}

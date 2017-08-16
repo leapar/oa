@@ -29,7 +29,7 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/files/**" access="permitAll"/>
         <intercept-url pattern="/download" access="permitAll"/>
-
+        <intercept-url pattern="/api/**" access="permitAll"/>
 
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
 
